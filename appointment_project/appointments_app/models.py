@@ -49,7 +49,7 @@ class Patient(models.Model):
         return patient.contact
 
     # metoda pobierająca dane szpitala, w którym leczy się pacjent
-    def getHostpital(self, patient):
+    def getHospital(self, patient):
         return patient.hospital
 
 
@@ -65,6 +65,20 @@ class Doctor(models.Model):
 
     def getWorkplace(self, doctor):
         return doctor.workplace
+
+
+# definicja pól dla modelu Pielęgniarka
+class Nurse(models.Model):
+    firstName = models.CharField(max_length=50, default='')
+    lastName = models.CharField(max_length=50, default='')
+    username = models.CharField(max_length=30, default='')
+    workplace = models.ForeignKey(Hospital, null=True, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'{self.firstName} {self.lastName}'
+
+    def getWorkplace(self, nurse):
+        return nurse.workplace
 
 
 # definicja pól modelu Admin
