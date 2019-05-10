@@ -162,3 +162,42 @@ def verify(request):
                 'username': username,
                 'error_message': 'There was a problem with your password',
             })
+
+
+# widok renderuje html dla strony home wyświetlanej po zalogowaniu
+def home(request):
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                try:
+                    a = Administrator.objects.get(username=uname)
+                except Administrator.DoesNotExist:
+                    return render(request, 'appointments_app/index.html', {
+                        'error_message': "An error has occurred"
+                    })
+                else:
+                    utype = "Administrator"
+                    context = {'user': a,
+                               'type': utype}
+                    return render(request, 'appointments_app/home.html', context)
+            else:
+                utype = "Nurse"
+                context = {'user': n,
+                           'type': utype}
+                return render(request, 'appointments_app/home.html', context)
+        else:
+            utype = "Doctor"
+            context = {'user': d,
+                       'type': utype}
+            return render(request, 'appointments_app/home.html', context)
+    else:
+        utype = "Patient"
+        context = {'user': p,
+                   'type': utype}
+        return render(request, 'appointments_app/home.html', context)
