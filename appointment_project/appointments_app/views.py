@@ -256,3 +256,12 @@ def createDoctorNurseLogIn(request):
             'workplace': Hospital.objects.order_by("-name"),
             'error_message': "Username already exists.",
         })
+
+
+# widok renderujący html z informacjami o użytkowniku
+def information(request):
+    global uname
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+

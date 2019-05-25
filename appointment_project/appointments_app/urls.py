@@ -12,4 +12,5 @@ urlpatterns = [
     path('home/', views.home, name="home"),
     path('home/register-doctor-nurse', views.registerDoctorNurse, name='registerDoctorNurse'),
     path('home/register-doctor-nurse/create-doctor-nurse', views.createDoctorNurseLogIn, name='createDoctorNurseLogIn'),
+    path('information/', views.information, name='information'),
 ]
