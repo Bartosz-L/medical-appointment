@@ -201,3 +201,58 @@ def home(request):
         context = {'user': p,
                    'type': utype}
         return render(request, 'appointments_app/home.html', context)
+
+
+# widok odpowiada za renderowanie html'a dla rejestracji doktora i pielegniarki
+def registerDoctorNurse(request):
+    workplaces = Hospital.objects.order_by('-name')
+    admin = Administrator.objects.get(username=uname)
+    context = {'workplaces': workplaces, 'admin': admin}
+    return render(request, 'appointments_app/registerDoctorNurse.html', context)
+
+
+# widok odpowiada za rejestrację Doktora i Pielęgniarki. Moduł LogInInfo jest użyty do zachowania danych w bazie danych
+def createDoctorNurseLogIn(request):
+    firstName = (request.POST['firstName'])
+    lastName = (request.POST['lastName'])
+    type = (request.POST['type'])
+    username = (request.POST['username'])
+    password = (request.POST['password'])
+    admin = Administrator.objects.get(username=uname)
+    try:
+        logininfo = LogInInfo.objects.get(username=username)
+    except ObjectDoesNotExist:
+        LogInInfo.objects.create(username=username, password=password)
+        if type == 'Doctor':
+            Doctor.objects.create(username=username, firstName=firstName, lastName=lastName)
+            d = Doctor.objects.get(username=username)
+            d.workplace = admin.workplace
+            d.save()
+            activity = f'Administrator {uname} registered a new doctor account - logged on: ' \
+                f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+            logActivity(activity)
+            return HttpResponseRedirect(reverse('appointments_app:home', args=()))
+        elif type == 'Nurse':
+            Nurse.objects.create(username=username, firstName=firstName, lastName=lastName)
+            n = Nurse.objects.get(username=username)
+            n.workplace = admin.workplace
+            n.save()
+            activity = f'Administrator {uname} registered a new Nurse account - logged on: ' \
+                f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+            logActivity(activity)
+            return HttpResponseRedirect(reverse('appointments_app:home', args=()))
+        else:
+            Administrator.objects.create(username=username, firstName=firstName, lastName=lastName)
+            a = Administrator.objects.get(username=username)
+            a.workplace = admin.workplace
+            a.save()
+            activity = f'Administrator {uname} registered a new Administrator account - logged on: ' \
+                f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+            logActivity(activity)
+            return HttpResponseRedirect(reverse('appointments_app:home', args=()))
+    else:
+        return render(request, 'appointments_app/registerDoctorNurse.html', {
+            'username': username,
+            'workplace': Hospital.objects.order_by("-name"),
+            'error_message': "Username already exists.",
+        })
