@@ -298,3 +298,11 @@ def information(request):
                    'type': utype,
                    'tests': tests}
         return render(request, 'appointments_app/information.html', context)
+
+
+# Widok odpowiada za renderowanie htmla do edycji Profilu.
+def updateProfile(request):
+    global uname
+    patient = Patient.objects.get(username=uname)
+    context = {'patient': patient}
+    return render(request, 'appointments_app/updateProfile.html', context)
