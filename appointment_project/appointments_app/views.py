@@ -264,4 +264,37 @@ def information(request):
     try:
         p = Patient.objects.get(username=uname)
     except Patient.DoesNotExist:
-
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                return render(request, 'appointments_app/home.html', {
+                    'error_message': "An error has occurred"
+                })
+            else:
+                utype = 'Nurse'
+                patients = Patient.objects.order_by("-lastName")
+                patw = Patient.objects.filter(hospital=n.workplace)
+                context = {'patients': patients,
+                           'patw': patw,
+                           'employee': n,
+                           'type': utype}
+                return render(request, 'appointments_app/information.html', context)
+        else:
+            utype = "Doctor"
+            patients = Patient.objects.order_by("-lastName")
+            patw = Patient.objects.filter(hospital=d.workplace)
+            context = {'patients': patients,
+                       'patw': patw,
+                       'employee': d,
+                       'type': utype}
+            return render(request, 'appointments_app/information.html', context)
+    else:
+        utype = "Patient"
+        tests = Test.objects.filter(patient=p)
+        context = {'patient': p,
+                   'type': utype,
+                   'tests': tests}
+        return render(request, 'appointments_app/information.html', context)
