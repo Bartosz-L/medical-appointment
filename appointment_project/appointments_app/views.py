@@ -306,3 +306,67 @@ def updateProfile(request):
     patient = Patient.objects.get(username=uname)
     context = {'patient': patient}
     return render(request, 'appointments_app/updateProfile.html', context)
+
+
+# Widok zamuje się modyfikowaniem bazy dla profilu pacjenta. Po zapisaniu danych, użytkownik jest przenoszony do informacji o pacjencie.
+def updateProfileInfo(request):
+    firstName = (request.POST['firstName'])
+    lastName = (request.POST['lastName'])
+    address = (request.POST['address'])
+    number = (request.POST['number'])
+    email = (request.POST['email'])
+    provider = (request.POST['provider'])
+    insuranceId = (request.POST['insuranceId'])
+    contactfname = (request.POST['contactfname'])
+    contactlname = (request.POST['contactlname'])
+    contactaddress = (request.POST['contactaddress'])
+    contactnumber = (request.POST['contactnumber'])
+    try:
+        contact = EmergencyContact.objects.get(firstName=contactfname, lastName=contactlname, address=contactaddress,
+                                               number=contactnumber)
+    except ObjectDoesNotExist:
+        contact = EmergencyContact.objects.create(firstName=contactfname, lastName=contactlname, address=contactaddress,
+                                                  number=contactnumber)
+    patient = Patient.objects.get(username=uname)
+    patient.firstName = firstName
+    patient.lastName = lastName
+    patient.address = address
+    patient.number = number
+    patient.email = email
+    patient.provider = provider
+    patient.insuranceid = insuranceid
+    patient.contact = contact
+    patient.save()
+
+    activity = f'User {patient.username} updated their profile info - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('appointments_app:information', args=()))
+
+
+# This module simply renders the HTML page for the update medical information screen.
+def updateMed(request, pat_id):
+    global uname
+    patient = Patient.objects.get(id=pat_id)
+    context = {'patient': patient}
+    return render(request, 'appointments_app/updateMedInfo.html', context)
+
+
+# This module handles modifying the database object for a patient's medical information after retrieving POST data from
+# the form submission. After the object is updated and saved, the user is redirected to the user information screen.
+def updateMedInfo(request, pat_id):
+    height = (request.POST['height'])
+    weight = (request.POST['weight'])
+    allergies = (request.POST['allergies'])
+    gender = (request.POST['gender'])
+    patient = Patient.objects.get(id=pat_id)
+    patient.height = height
+    patient.weight = weight
+    patient.allergies = allergies
+    patient.gender = gender
+    patient.save()
+
+    activity = f'User {uname} updated Patient {patient.username}\'s medical information - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('appointments_app:information', args=()))

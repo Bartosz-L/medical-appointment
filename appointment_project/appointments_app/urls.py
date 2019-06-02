@@ -14,4 +14,8 @@ urlpatterns = [
     path('home/register-doctor-nurse/create-doctor-nurse', views.createDoctorNurseLogIn, name='createDoctorNurseLogIn'),
     path('information/', views.information, name='information'),
     path('information/update-profile', views.updateProfile, name='updateProfile'),
+    path('information/update-profile/update-profile-info', views.updateProfileInfo, name='updateProfileInfo'),
+    path('information/update-med/<int:pat_id>)/', views.updateMed, name='updateMed'),
+    path('information/update-med/update-med-info/<int:pat_id>/', views.updateMedInfo, name='updateMedInfo'),
+
 ]
