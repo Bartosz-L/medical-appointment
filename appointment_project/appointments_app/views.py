@@ -429,3 +429,76 @@ def transfer(request, pat_id, emp_id):
     patient.hospital = hospital
     patient.save()
     return HttpResponseRedirect(reverse('appointments_app:information', args=()))
+
+
+# Widok renderuje HTML dla badań.
+def tests(request, pat_id):
+    p = Patient.objects.get(id=pat_id)
+    t = Test.objects.filter(patient=p)
+    context = {'patient': p,
+               'test': t}
+    return render(request, 'appointments_app/tests.html', context)
+
+
+# Widok renderuje HTML dla tworzenia na nowych badań
+def createTest(request, pat_id):
+    global uname
+    patient = Patient.objects.get(id=pat_id)
+    context = {'patient': patient}
+    return render(request, 'appointments_app/createTest.html', context)
+
+
+# Moduł zajmuje się tworzeniem obiektu badań w bazie danych.
+# Po utworzeniu badania, użytkownik jest przekierowany do karty badań.
+def createTestInfo(request, pat_id):
+    global uname
+    name = (request.POST['name'])
+    t = Test.objects.create()
+    description = (request.POST['description'])
+    try:
+        if request.FILES['file']:
+            file = request.FILES['file']
+    except MultiValueDictKeyError:
+        placeholder = ""
+        t.testResults = placeholder
+    else:
+        t.testResults = file
+    patient = Patient.objects.get(id=pat_id)
+    doctor = Doctor.objects.get(username=uname)
+    t.name = name
+    t.description = description
+
+    t.doctor = doctor
+    t.patient = patient
+    t.save()
+
+    activity = f'Doctor {doctor.username} created a new test for Patient {patient.username} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+
+    return HttpResponseRedirect(reverse('appointments_app:tests', args=pat_id))
+
+
+# Moduł zajmuje się publikowaniem nieopublikowanego badania. Użytkownik jest przenoszony do strony z badaniami
+def releaseTest(request, test_id):
+    t = Test.objects.get(id=test_id)
+    t.released = True
+    t.save()
+
+    activity = f'Patient {t.patient.username}\'s test results were released by Doctor' \
+        f' {t.doctor.username} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+
+    return HttpResponseRedirect(reverse('appointments_app:tests', args=(t.patient.id,)))
+
+
+# moduł wyświetlania zawartości badania dla pacjenta
+def testDetails(request, test_id):
+    global uname
+    test = Test.objects.get(id=test_id)
+    context = {'test': test}
+    return render(request, 'appointments_app/testDetails.html', context)
+
+
+
