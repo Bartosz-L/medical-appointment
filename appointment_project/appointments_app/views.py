@@ -546,3 +546,45 @@ def appointments(request):
                    'user': p,
                    'type': utype}
         return render(request, 'appointments_app/appointments.html', context)
+
+
+# Widok odpowiadający za renderowanie HTMLa dla umawiania wizyt.
+def createAppointment(request):
+    global uname
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                return render(request, 'appointments_app/home.html', {
+                    'error_message': "An error has occurred"
+                })
+            else:
+                utype = "Nurse"
+                # Nurses can create an appointment with any patient and any Doctor from their workplace.
+                patients = Patient.objects.order_by("-lastName")
+                doctors = Doctor.objects.filter(workplace=n.workplace)
+                context = {'patients': patients,
+                           'doctors': doctors,
+                           'type': utype}
+                return render(request, 'appointments_app/createAppointment.html', context)
+        else:
+            utype = "Doctor"
+            # Doctors can create an appointment with any patient with themselves.
+            patients = Patient.objects.order_by("-lastName")
+            context = {'patients': patients,
+                       'doctor': d,
+                       'type': utype}
+            return render(request, 'appointments_app/createAppointment.html', context)
+    else:
+        utype = "Patient"
+        # Patients can create an appointment with any Doctor
+        doctors = Doctor.objects.order_by("-lastName")
+        context = {'patient': p,
+                   'doctors': doctors,
+                   'type': utype}
+        return render(request, 'appointments_app/createAppointment.html', context)
