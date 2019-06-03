@@ -26,4 +26,12 @@ urlpatterns = [
     path('information/tests/create-test/create-test-info/<int:pat_id>/', views.createTestInfo, name='createTestInfo'),
     path('information/tests/release-test/<int:test_id>/', views.releaseTest, name='releaseTest'),
     path('information/test-details/<int:test_id>/', views.testDetails, name='testDetails'),
+    path('appointments/$', views.appointments, name='appointments'),
+    path('appointments/create-appointment', views.createAppointment, name='createAppointment'),
+    path('appointments/create-appointment/create-appointment-info', views.createAppointmentInfo,
+         name="createAppointmentInfo"),
+    path('appointments/update-appointment/<int:appt_id>/', views.updateAppointment, name='updateAppointment'),
+    path('appointments/update-appointment/update-appointment-info/<int:appt_id>/', views.updateAppointmentInfo,
+         name='updateAppointmentInfo'),
+    path('appointments/cancel-appointment/<int:appt_id>/', views.cancelAppointment, name='cancelAppointment'),
 ]

@@ -501,4 +501,48 @@ def testDetails(request, test_id):
     return render(request, 'appointments_app/testDetails.html', context)
 
 
-
+# widok zajmuje się renderowaniem HTMLa dla umawiania wizyt.
+def appointments(request):
+    global uname
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                return render(request, 'appointments_app/home.html', {
+                    'error_message': "An error has occurred"
+                })
+            else:
+                utype = "Nurse"
+                # pielęgniarka może utworzyć albo zaktualizować wizytę u Doktora w lokalizacj, w której pracuje
+                # pielęgniarka nie może anulować wizyt.
+                appointments = Appointment.objects.filter(location=n.workplace)
+                context = {'appointments': appointments,
+                           'employee': n,
+                           'type': utype}
+                return render(request, 'appointments_app/appointments.html', context)
+        else:
+            utype = "Doctor"
+            # Doktor może utworzyć albo zaktualizować wizytę u Doktora w lokalizacj, w której pracuje
+            # Doktor może anulować wizyte.
+            appointments = Appointment.objects.filter(location=d.workplace)
+            this_appointments = Appointment.objects.filter(doctor=d)
+            context = {'appointments': appointments,
+                       'this_appointments': this_appointments,
+                       'employee': d,
+                       'type': utype}
+            return render(request, 'appointments_app/appointments.html', context)
+    else:
+        utype = "Patient"
+        # Pacjent może utworzyć wizytę z jakimkolwiek doktorem
+        # Pacjent może aktualizować SWOJĄ wizytę
+        # Pacjent może anulować SWOJĄ wizytę
+        appointments = Appointment.objects.filter(patient=p)
+        context = {'appointments': appointments,
+                   'user': p,
+                   'type': utype}
+        return render(request, 'appointments_app/appointments.html', context)
