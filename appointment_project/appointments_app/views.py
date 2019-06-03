@@ -345,7 +345,7 @@ def updateProfileInfo(request):
     return HttpResponseRedirect(reverse('appointments_app:information', args=()))
 
 
-# This module simply renders the HTML page for the update medical information screen.
+# Widok renderuje HTML dla zmiany informacji medycznych o pacjencie.
 def updateMed(request, pat_id):
     global uname
     patient = Patient.objects.get(id=pat_id)
@@ -353,8 +353,8 @@ def updateMed(request, pat_id):
     return render(request, 'appointments_app/updateMedInfo.html', context)
 
 
-# This module handles modifying the database object for a patient's medical information after retrieving POST data from
-# the form submission. After the object is updated and saved, the user is redirected to the user information screen.
+# Widok zamuje się modyfikowaniem bazy dla informacji medycznych o pacjencie.
+# Po zapisaniu danych, użytkownik jest przenoszony do informacji o pacjencie.
 def updateMedInfo(request, pat_id):
     height = (request.POST['height'])
     weight = (request.POST['weight'])
@@ -373,7 +373,7 @@ def updateMedInfo(request, pat_id):
     return HttpResponseRedirect(reverse('appointments_app:information', args=()))
 
 
-# This module when activated, downloads the current patient's information onto their current computer in a .csv file.
+# Widok zajmuje się eksportowaniem informacji o pacjencie do pliku CSV na lokalną maszynę.
 def export(request):
     global uname
     patient = Patient.objects.get(username=uname)
@@ -403,3 +403,11 @@ def export(request):
         f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
     logActivity(activity)
     return response
+
+
+# Widok odpowiada za usuwanie pacjenta ze szpitala.
+def discharge(request, pat_id):
+    patient = Patient.objects.get(id=pat_id)
+    patient.hospital = None
+    patient.save()
+    return HttpResponseRedirect(reverse('appointments_app:information', args=()))
