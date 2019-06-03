@@ -308,7 +308,8 @@ def updateProfile(request):
     return render(request, 'appointments_app/updateProfile.html', context)
 
 
-# Widok zamuje się modyfikowaniem bazy dla profilu pacjenta. Po zapisaniu danych, użytkownik jest przenoszony do informacji o pacjencie.
+# Widok zamuje się modyfikowaniem bazy dla profilu pacjenta.
+# Po zapisaniu danych, użytkownik jest przenoszony do informacji o pacjencie.
 def updateProfileInfo(request):
     firstName = (request.POST['firstName'])
     lastName = (request.POST['lastName'])
@@ -370,3 +371,35 @@ def updateMedInfo(request, pat_id):
         f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
     logActivity(activity)
     return HttpResponseRedirect(reverse('appointments_app:information', args=()))
+
+
+# This module when activated, downloads the current patient's information onto their current computer in a .csv file.
+def export(request):
+    global uname
+    patient = Patient.objects.get(username=uname)
+    testResults = Test.objects.filter(patient=patient, released=True)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="PatientInfo.csv"'
+    filewriter = csv.writer(response)
+    filewriter.writerow(['', 'Name', 'Email', 'Address', 'Phone Number', 'Insurance ID', 'Insurance Provider'])
+    filewriter.writerow(
+        ['Patient Profile Info:', patient.lastName + "," + patient.firstName, patient.email, patient.address,
+         patient.number, patient.insuranceId, patient.provider])
+    filewriter.writerow([''])
+    filewriter.writerow(['', 'Name', 'Address', 'Phone Number'])
+    filewriter.writerow(['Patient Emergency Contact:', patient.contact.lastName + ", " + patient.contact.firstName,
+                         patient.contact.address, patient.contact.number])
+    filewriter.writerow([''])
+    filewriter.writerow(['', 'Height', 'Weight', 'Allergies', 'Gender'])
+    filewriter.writerow(
+        ['Patient Medical Information:', patient.height, patient.weight, patient.allergies, patient.gender])
+    filewriter.writerow([''])
+    filewriter.writerow(['Patient Test Information', 'Name', 'Doctor Notes', 'Doctor Name'])
+    count = 1
+    for test in testResults:
+        filewriter.writerow(['Test ' + str(count), test.name, test.description, test.doctor])
+        count += 1
+    activity = f'User {patient.username} exported their information - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return response

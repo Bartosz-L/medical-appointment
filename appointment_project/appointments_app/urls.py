@@ -17,5 +17,5 @@ urlpatterns = [
     path('information/update-profile/update-profile-info', views.updateProfileInfo, name='updateProfileInfo'),
     path('information/update-med/<int:pat_id>)/', views.updateMed, name='updateMed'),
     path('information/update-med/update-med-info/<int:pat_id>/', views.updateMedInfo, name='updateMedInfo'),
-
+    path('information/export', views.export, name='export'),
 ]
