@@ -411,3 +411,21 @@ def discharge(request, pat_id):
     patient.hospital = None
     patient.save()
     return HttpResponseRedirect(reverse('appointments_app:information', args=()))
+
+
+# Widok odpowiada za przypisywanie pacjenta do szpitala.
+def admission(request, pat_id, emp_id):
+    patient = Patient.objects.get(id=pat_id)
+    hospital = Hospital.objects.get(id=emp_id)
+    patient.hospital = hospital
+    patient.save()
+    return HttpResponseRedirect(reverse('appointments_app:information', args=()))
+
+
+# Widok zajmuje się transferem pacjenta między szpitalami.
+def transfer(request, pat_id, emp_id):
+    patient = Patient.objects.get(id=pat_id)
+    hospital = Hospital.objects.get(id=emp_id)
+    patient.hospital = hospital
+    patient.save()
+    return HttpResponseRedirect(reverse('appointments_app:information', args=()))

@@ -19,5 +19,6 @@ urlpatterns = [
     path('information/update-med/update-med-info/<int:pat_id>/', views.updateMedInfo, name='updateMedInfo'),
     path('information/export', views.export, name='export'),
     path('information/discharge/<int:pat_id>', views.discharge, name='discharge'),
-
+    path('information/admission/<int:pat_id>/<int:emp_id>', views.admission, name="admission"),
+    path('information/transfer/<int:pat_id>/<int:emp_id>', views.transfer, name="transfer"),
 ]
