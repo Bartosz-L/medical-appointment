@@ -800,3 +800,111 @@ def cancelAppointment(request, appt_id):
         f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
     logActivity(activity)
     return HttpResponseRedirect(reverse('appointments_app:appointments', args=()))
+
+
+# This module simply loads the HTML page for the prescriptions screen.
+def prescriptions(request):
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                return render(request, 'appointments_app/home.html', {
+                    'error_message': "An error has occurred"
+                })
+            else:
+                utype = "Nurse"
+                pres = Prescription.objects.filter(patient__hospital=n.workplace)
+                context = {'prescriptions': pres,
+                           'type': utype,
+                           'employee': n}
+                return render(request, 'appointments_app/prescriptions.html', context)
+        else:
+            pres = Prescription.objects.filter(doctor=d)
+            presatw = Prescription.objects.filter(patient__hospital=d.workplace)
+            utype = "Doctor"
+            context = {'prescriptions': pres,
+                       'presatw': presatw,
+                       'type': utype,
+                       'employee': d}
+            return render(request, 'appointments_app/prescriptions.html', context)
+    else:
+        utype = "Patient"
+        pres = Prescription.objects.filter(patient=p)
+        context = {'prescriptions': pres,
+                   'type': utype,
+                   'patient': p}
+        return render(request, 'appointments_app/prescriptions.html', context)
+
+
+# This module simply renders the HTML page for the create prescription screen.
+def createPrescriptions(request):
+    patients = Patient.objects.order_by("-lastName")
+    context = {'patients': patients}
+    return render(request, 'appointments_app/createPrescriptions.html', context)
+
+
+# This module handles creating a database object for a prescription after retrieving POST data from the form submission.
+#  After the object is created and saved, the user is redirected to the prescriptions screen.
+def createPrescriptionsInfo(request):
+    global uname
+    name = (request.POST['name'])
+    dosage = (request.POST['dosage'])
+    patient = Patient.objects.get(id=(request.POST['patient']))
+    doctor = Doctor.objects.get(username=uname)
+    pre = Prescription.objects.create()
+    pre.name = name
+    pre.dosage = dosage
+    pre.doctor = doctor
+    pre.patient = patient
+    pre.save()
+
+    activity = f'Doctor {doctor.username} created a prescription for Patient {patient.username} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('appointments_app:prescriptions', args=()))
+
+
+# This module simply renders the HTML page for the update prescriptions screen.
+def updatePrescriptions(request, pres_id):
+    p = Prescription.objects.get(id=pres_id)
+    patients = Patient.objects.order_by("-lastName")
+    context = {'patients': patients,
+               'prescription': p}
+    return render(request, 'appointments_app/updatePrescriptions.html', context)
+
+
+# This module handles modifying the database object after retrieving POST data from the form submission.
+# After the object is updated and saved, the doctor is redirected to their prescriptions screen.
+def updatePrescriptionsInfo(request, pres_id):
+    name = (request.POST['name'])
+    dosage = (request.POST['dosage'])
+    patient = Patient.objects.get(id=(request.POST['patient']))
+    doctor = Doctor.objects.get(username=uname)
+    pre = Prescription.objects.get(id=pres_id)
+    pre.name = name
+    pre.dosage = dosage
+    pre.doctor = doctor
+    pre.patient = patient
+    pre.save()
+
+    activity = f'Doctor {doctor.username} updated Prescription #{pres_id} ' \
+        f'for Patient {patient.username} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('appointments_app:prescriptions', args=()))
+
+
+# This module handles deleting the database object for a prescription. Afterwards, the doctor is redirected to
+# their prescriptions screen.
+def removePrescriptions(request, pres_id):
+    Prescription.objects.get(id=pres_id).delete()
+
+    activity = f'Doctor {uname} removed Prescription #{pres_id} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('HealthNet:prescriptions', args=()))
