@@ -1,1 +1,7 @@
 User test registered a new account - logged on: 05/10/19 @ 12:46:39
+User john registered a new account - logged on: 06/04/19 @ 16:00:37
+User john logged in - logged on 06/04/19 @ 16:00:56
+User john logged in - logged on 06/04/19 @ 16:06:23
+User john logged out - logged on: 06/04/19 @ 16:19:59
+User john logged in - logged on 06/04/19 @ 16:20:44
+User john logged out - logged on: 06/04/19 @ 16:20:46

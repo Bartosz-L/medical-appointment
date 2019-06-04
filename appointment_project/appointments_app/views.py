@@ -1127,4 +1127,4 @@ def logout(request):
         f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
     uname = ''
     logActivity(activity)
-    return HttpResponseRedirect(reverse('HealthNet:index', args=()))
+    return HttpResponseRedirect(reverse('appointments_app:index', args=()))

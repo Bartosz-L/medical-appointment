@@ -13,7 +13,6 @@
 {% bootstrap_messages %}
 <head>
   <title>Appointments | Login</title>
-  {#  <link rel="stylesheet" type="text/css" href="{% static 'formPages.css' %}">#}
   <link rel="shortcut icon" type="images/favicon" href="{% static 'images/favicon.ico' %}">
   <script type="text/javascript">
     function checkForm() {
@@ -54,7 +53,8 @@
         <label for="password">Password</label>
         <input class="form-control" type="password" name="password" placeholder="Password" id="password"/>
       </div>
-      <button type="submit" class="btn btn-success btn-lg btn-block" value="Log In" style="margin-bottom: 16px">Log In</button>
+      <button type="submit" class="btn btn-success btn-lg btn-block" value="Log In" style="margin-bottom: 16px">Log In
+      </button>
     </form>
 
     <form action="{% url 'appointments_app:registration' %}" style="margin-bottom: 16px">
@@ -62,7 +62,9 @@
     </form>
 
     <form action="{% url 'appointments_app:password' %}" style="margin-bottom: 16px">
-      <button type="submit" class="btn btn-secondary btn-lg btn-block" value="Forgot Your Password?">Forgot Your Password?</button>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block" value="Forgot Your Password?">Forgot Your
+        Password?
+      </button>
     </form>
   </div>
 </div>
