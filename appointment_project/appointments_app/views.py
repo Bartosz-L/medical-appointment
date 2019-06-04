@@ -1117,3 +1117,14 @@ def deleteMessages(request, mess_id):
         f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
     logActivity(activity)
     return HttpResponseRedirect(reverse('appointments_app:messages', args=()))
+
+
+# This module handles logging-out a user. Afterwards the user is redirected to the index screen.
+def logout(request):
+    global uname
+
+    activity = f'User {uname} logged out - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    uname = ''
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('HealthNet:index', args=()))
