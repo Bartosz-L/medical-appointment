@@ -42,4 +42,5 @@ urlpatterns = [
     path('prescriptions/update-prescriptions/update-prescriptions-info/<int:pres_id>/', views.updatePrescriptionsInfo,
          name='updatePrescriptionsInfo'),
     path('prescriptions/remove-prescriptions/<int:pres_id>/', views.removePrescriptions, name='removePrescriptions'),
+    path('calendar/', views.calendar, name='calendar'),
 ]

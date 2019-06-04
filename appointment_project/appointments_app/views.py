@@ -908,3 +908,44 @@ def removePrescriptions(request, pres_id):
         f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
     logActivity(activity)
     return HttpResponseRedirect(reverse('HealthNet:prescriptions', args=()))
+
+
+# This module simply renders the HTML page for the calendar screen.
+def calendar(request):
+    global uname
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                return render(request, 'appointments_app/home.html', {
+                    'error_message': "An error has occurred"
+                })
+            else:
+                utype = "Nurse"
+                # Nurses can view all appointments for the day and week between patients and doctors, in their workplace
+                appts = Appointment.objects.filter(location=n.workplace)
+                context = {'appointments': appts,
+                           'user': n,
+                           'type': utype}
+                return render(request, 'appointments_app/calendar.html', context)
+        else:
+            utype = "Doctor"
+            # Doctors can view all of their appointments on the calendar
+            appts = Appointment.objects.filter(doctor=d)
+            context = {'appointments': appts,
+                       'user': d,
+                       'type': utype}
+            return render(request, 'appointments_app/calendar.html', context)
+    else:
+        utype = "Patient"
+        # Patients can view all of their appointments on the calendar
+        appts = Appointment.objects.filter(patient=p)
+        context = {'appointments': appts,
+                   'user': p,
+                   'type': utype}
+        return render(request, 'appointments_app/calendar.html', context)
