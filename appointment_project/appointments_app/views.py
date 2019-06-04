@@ -25,7 +25,7 @@ import csv
 uname = ''
 
 
-# modił przeprowadza logowanie aktywności poprzez zapis logów do pliku textowego,
+# Widok przeprowadza logowanie aktywności poprzez zapis logów do pliku textowego,
 # który póżniej jest renderowany w HTMLu dla administratora do wglądu
 def logActivity(activity):
     filename = "log.txt"
@@ -588,3 +588,77 @@ def createAppointment(request):
                    'doctors': doctors,
                    'type': utype}
         return render(request, 'appointments_app/createAppointment.html', context)
+
+
+# This module handles creating a database object for an appointment after retrieving POST data from the form submission.
+# After the object is created and saved, the user is redirected to the appointments screen.
+def createAppointmentInfo(request):
+    patient = Patient.objects.get(id=(request.POST['patient']))
+    doctor = Doctor.objects.get(id=(request.POST['doctor']))
+    month = (request.POST['month'])
+    day = (request.POST['day'])
+    year = (request.POST['year'])
+    appttime = (request.POST['appttime'])
+    phase = (request.POST['phase'])
+    location = doctor.workplace
+    try:
+        appointment = Appointment.objects.get(appttime=appttime, doctor=doctor, month=month, day=day, year=year,
+                                              phase=phase)
+    except Appointment.DoesNotExist:
+        hp = Appointment.objects.create()
+        hp.patient = patient
+        hp.doctor = doctor
+        hp.month = month
+        hp.day = day
+        hp.year = year
+        hp.appttime = appttime
+        hp.phase = phase
+        hp.location = location
+        hp.save()
+
+        activity = f'User {uname} created an appointment at {location.name} on ' \
+            f'{month},{day},{year} {appttime} {phase} - logged on: ' \
+            f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+        logActivity(activity)
+        return HttpResponseRedirect(reverse('appointments_app:appointments', args=()))
+    else:
+        try:
+            p = Patient.objects.get(username=uname)
+        except Patient.DoesNotExist:
+            try:
+                d = Doctor.objects.get(username=uname)
+            except Doctor.DoesNotExist:
+                try:
+                    n = Nurse.objects.get(username=uname)
+                except Nurse.DoesNotExist:
+                    return render(request, 'appointments_app/home.html', {
+                        'error_message': "An error has occurred"
+                    })
+                else:
+                    utype = "Nurse"
+                    # Nurses can create an appointment with any patient and any Doctor from their workplace.
+                    patients = Patient.objects.order_by("-lastName")
+                    doctors = Doctor.objects.filter(workplace=n.workplace)
+                    context = {'patients': patients,
+                               'doctors': doctors,
+                               'type': utype,
+                               'error_message': "The appointment could not be created, the doctor is busy at that time."}
+                    return render(request, 'appointments_app/createAppointment.html', context)
+            else:
+                utype = "Doctor"
+                # Doctors can create an appointment with any patient with themselves.
+                patients = Patient.objects.order_by("-lastName")
+                context = {'patients': patients,
+                           'doctor': d,
+                           'type': utype,
+                           'error_message': "The appointment could not be created, the doctor is busy at that time."}
+                return render(request, 'appointments_app/createAppointment.html', context)
+        else:
+            utype = "Patient"
+            # Patients can create an appointment with any Doctor
+            doctors = Doctor.objects.order_by("-lastName")
+            context = {'patient': p,
+                       'doctors': doctors,
+                       'type': utype,
+                       'error_message': "The appointment could not be created, the doctor is busy at that time."}
+            return render(request, 'appointments_app/createAppointment.html', context)
