@@ -981,3 +981,56 @@ def statistics(request):
                'appointments': appts,
                'prescriptions': pres}
     return render(request, 'appointments_app/statistics.html', context)
+
+
+# This module simply renders the main messaging page for a user. All of their received and sent message are displayed
+# on the page, with various options for the user to choose from.
+def messages(request):
+    global uname
+    try:
+        m = Message.objects.filter(receiverDelete=False)
+        mess = m.filter(receiverName=uname)
+    except Message.DoesNotExist:
+        mess = Null
+    try:
+        sm = Message.objects.filter(senderDelete=False)
+        sendmess = sm.filter(senderName=uname)
+    except Message.DoesNotExist:
+        sendmess = Null
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                utype = "Administrator"
+            else:
+                utype = "Nurse"
+        else:
+            utype = "Doctor"
+    else:
+        utype = "Patient"
+    context = {'messages': mess,
+               'type': utype,
+               'sendMessages': sendmess}
+    return render(request, 'appointments_app/messages.html', context)
+
+
+# This module simply renders the create message page for a user.
+def createMessages(request):
+    global uname
+    logins = LogInInfo.objects.all()
+    context = {'logins': logins}
+    return render(request, 'appointments_app/createMessages.html', context)
+
+
+# This module simply renders the reply message page for a user.
+def replyMessages(request, mess_id):
+    global uname
+    logins = LogInInfo.objects.all()
+    context = {'logins': logins,
+               'message': Message.objects.get(id=mess_id)}
+    return render(request, 'appointments_app/replyMessages.html', context)

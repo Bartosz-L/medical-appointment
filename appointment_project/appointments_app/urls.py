@@ -55,4 +55,14 @@ urlpatterns = [
     path('prescriptions/remove-prescriptions/<int:pres_id>/', views.removePrescriptions, name='removePrescriptions'),
     # calendar view
     path('calendar/', views.calendar, name='calendar'),
+    # messages view
+    path('messages/', views.messages, name='messages'),
+    path('messages/create-messages/', views.createMessages, name='createMessages'),
+    path('messages/create-messages/create-messages-info/<int:mess_id>/', views.createMessagesInfo,
+         name="createMessagesInfo"),
+    path('messages/reply-messages/<int:mess_id>/', views.replyMessages, name='replyMessages'),
+    path('messages/reply-messages/create-messages-info/<int:mess_id>', views.createMessagesInfo,
+         name="createMessagesInfo"),
+    path('messages/view-messages/<int:mess_id>/', views.viewMessages, name='viewMessages'),
+    path('messages/delete-messages/<int:mess_id>/', views.deleteMessages, name='deleteMessages'),
 ]
