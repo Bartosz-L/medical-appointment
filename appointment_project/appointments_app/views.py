@@ -949,3 +949,35 @@ def calendar(request):
                    'user': p,
                    'type': utype}
         return render(request, 'appointments_app/calendar.html', context)
+
+
+# This module simply renders the activity log for an administrator account
+def log(request):
+    filename = "log.txt"
+    cwd = os.getcwd()
+    target = open(cwd + "\\appointments_app\\log\\" + filename, 'r')
+    appString = target.readline()
+    logString = []
+    while appString != "":
+        logString.append(appString)
+        appString = target.readline()
+    target.close()
+    context = {'logString': logString}
+    return render(request, 'appointments_app/log.html', context)
+
+
+# This module simply renders the statistics page for an administrator account
+def statistics(request):
+    admins = Administrator.objects.count()
+    doctors = Doctor.objects.count()
+    nurses = Nurse.objects.count()
+    patients = Patient.objects.count()
+    appts = Appointment.objects.count()
+    pres = Prescription.objects.count()
+    context = {'admins': admins,
+               'doctors': doctors,
+               'nurses': nurses,
+               'patients': patients,
+               'appointments': appts,
+               'prescriptions': pres}
+    return render(request, 'appointments_app/statistics.html', context)
