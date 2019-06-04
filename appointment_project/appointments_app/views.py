@@ -662,3 +662,141 @@ def createAppointmentInfo(request):
                        'type': utype,
                        'error_message': "The appointment could not be created, the doctor is busy at that time."}
             return render(request, 'appointments_app/createAppointment.html', context)
+
+
+# This module simply renders the HTML page for the update appointment screen.
+def updateAppointment(request, appt_id):
+    global uname
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                return render(request, 'appointments_app/home.html', {
+                    'error_message': "An error has occurred"
+                })
+            else:
+                utype = "Nurse"
+                # Nurses can update an appointment to be with any Doctor from their workplace
+                appointment = Appointment.objects.get(id=appt_id)
+                patient = appointment.patient
+                doctors = Doctor.objects.filter(workplace=n.workplace)
+                context = {'appointment': appointment,
+                           'patient': patient,
+                           'doctors': doctors,
+                           'type': utype}
+                return render(request, 'appointments_app/updateAppointment.html', context)
+        else:
+            utype = "Doctor"
+            # Doctors can update an appointment to be with any Doctor from their workplace
+            appointment = Appointment.objects.get(id=appt_id)
+            patient = appointment.patient
+            doctors = Doctor.objects.filter(workplace=d.workplace)
+            context = {'appointment': appointment,
+                       'patient': patient,
+                       'doctors': doctors,
+                       'type': utype}
+            return render(request, 'appointments_app/updateAppointment.html', context)
+    else:
+        utype = "Patient"
+        # Patients can update an appointment to be with any Doctor
+        appointment = Appointment.objects.get(id=appt_id)
+        doctors = Doctor.objects.order_by("-lastName")
+        context = {'appointment': appointment,
+                   'patient': p,
+                   'doctors': doctors,
+                   'type': utype}
+        return render(request, 'appointments_app/updateAppointment.html', context)
+
+
+# This module handles modifying the database object for an appointment after retrieving POST data from the form
+# submission. After the object is updated and saved, the user is redirected to their appointments screen.
+def updateAppointmentInfo(request, appt_id):
+    doctor = Doctor.objects.get(id=(request.POST['doctor']))
+    month = (request.POST['month'])
+    day = (request.POST['day'])
+    year = (request.POST['year'])
+    appttime = (request.POST['appttime'])
+    phase = (request.POST['phase'])
+    location = doctor.workplace
+    try:
+        appointment = Appointment.objects.get(appttime=appttime, doctor=doctor, month=month, day=day, year=year,
+                                              phase=phase)
+    except Appointment.DoesNotExist:
+        appt = Appointment.objects.get(id=appt_id)
+        appt.doctor = doctor
+        appt.month = month
+        appt.day = day
+        appt.year = year
+        appt.appttime = appttime
+        appt.phase = phase
+        appt.location = location
+        appt.save()
+
+        activity = f'User {uname} updated Appointment #{appt_id} - logged on: ' \
+            f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+        logActivity(activity)
+        return HttpResponseRedirect(reverse('appointments_app:appointments', args=()))
+    else:
+        try:
+            p = Patient.objects.get(username=uname)
+        except Patient.DoesNotExist:
+            try:
+                d = Doctor.objects.get(username=uname)
+            except Doctor.DoesNotExist:
+                try:
+                    n = Nurse.objects.get(username=uname)
+                except Nurse.DoesNotExist:
+                    return render(request, 'appointments_app/home.html', {
+                        'error_message': "An error has occurred"
+                    })
+                else:
+                    utype = "Nurse"
+                    # Nurses can update an appointment to be with any Doctor from their workplace
+                    appointment = Appointment.objects.get(id=appt_id)
+                    patient = appointment.patient
+                    doctors = Doctor.objects.filter(workplace=n.workplace)
+                    context = {'appointment': appointment,
+                               'patient': patient,
+                               'doctors': doctors,
+                               'type': utype,
+                               'error_message': "The appointment could not be created, the doctor is busy at that time."}
+                    return render(request, 'appointments_app/updateAppointment.html', context)
+            else:
+                utype = "Doctor"
+                # Doctors can update an appointment to be with any Doctor from their workplace
+                appointment = Appointment.objects.get(id=appt_id)
+                patient = appointment.patient
+                doctors = Doctor.objects.filter(workplace=d.workplace)
+                context = {'appointment': appointment,
+                           'patient': patient,
+                           'doctors': doctors,
+                           'type': utype,
+                           'error_message': "The appointment could not be created, the doctor is busy at that time."}
+                return render(request, 'appointments_app/updateAppointment.html', context)
+        else:
+            utype = "Patient"
+            # Patients can update an appointment to be with any Doctor
+            appointment = Appointment.objects.get(id=appt_id)
+            doctors = Doctor.objects.order_by("-lastName")
+            context = {'appointment': appointment,
+                       'patient': p,
+                       'doctors': doctors,
+                       'type': utype,
+                       'error_message': "The appointment could not be created, the doctor is busy at that time."}
+            return render(request, 'appointments_app/updateAppointment.html', context)
+
+
+# This module handles deleting the database object for an appointment. Afterwards, the user is redirected to
+# their appointments screen.
+def cancelAppointment(request, appt_id):
+    Appointment.objects.get(id=appt_id).delete()
+
+    activity = f'User {uname} cancelled Appointment #{appt_id} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('appointments_app:appointments', args=()))
