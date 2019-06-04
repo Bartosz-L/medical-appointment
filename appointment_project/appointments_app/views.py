@@ -1034,3 +1034,86 @@ def replyMessages(request, mess_id):
     context = {'logins': logins,
                'message': Message.objects.get(id=mess_id)}
     return render(request, 'appointments_app/replyMessages.html', context)
+
+
+# This module handles creating a database object for a message after retrieving POST data from the form submission.
+# After the object is created and saved, the user is redirected to the main messages page.
+def createMessagesInfo(request, mess_id):
+    global uname
+    subject = (request.POST['subject'])
+    description = (request.POST['message'])
+    m = Message.objects.create()
+    if mess_id != "-1":
+        replyMess = Message.objects.get(id=mess_id)
+        if replyMess.senderName == uname:
+            m.receiverName = replyMess.receiverName
+            m.subjectLine = "RE - " + subject
+        else:
+            m.receiverName = replyMess.senderName
+            m.subjectLine = "RE - " + subject
+    else:
+        username = LogInInfo.objects.get(id=(request.POST['users'])).username
+        m.receiverName = username
+        m.subjectLine = subject
+    try:
+        p = Patient.objects.get(username=uname)
+    except Patient.DoesNotExist:
+        try:
+            d = Doctor.objects.get(username=uname)
+        except Doctor.DoesNotExist:
+            try:
+                n = Nurse.objects.get(username=uname)
+            except Nurse.DoesNotExist:
+                try:
+                    a = Administrator.objects.get(username=uname)
+                except Administrator.DoesNotExist:
+                    return render(request, 'appointments_app/home.html', {
+                        'error_message': "An error has occurred"
+                    })
+                else:
+                    utype = "Administrator"
+            else:
+                utype = "Nurse"
+        else:
+            utype = "Doctor"
+    else:
+        utype = "Patient"
+    m.senderName = uname
+    m.senderType = utype
+    m.date = date.today()
+    m.message = description
+    m.save()
+
+    activity = f'{utype} {uname} sent a message to {m.receiverName} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return messages(request)
+
+
+# This module simply displays the View Message page for a user when they select the option to view a received/sent
+# message.
+def viewMessages(request, mess_id):
+    global uname
+    mess = Message.objects.get(id=mess_id)
+    context = {'message': mess}
+    return render(request, 'appointments_app/viewMessages.html', context)
+
+
+# This module handles deleting a preexisting message from a user's inbox.
+def deleteMessages(request, mess_id):
+    global uname
+    mess = Message.objects.get(id=mess_id)
+    if uname == mess.senderName:
+        mess.senderDelete = True
+        mess.save()
+    else:
+        mess.receiverDelete = True
+        mess.save()
+
+    if mess.senderDelete is True and mess.receiverDelete is True:
+        mess.delete()
+
+    activity = f'{uname} deleted message #{mess_id} - logged on: ' \
+        f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
+    logActivity(activity)
+    return HttpResponseRedirect(reverse('appointments_app:messages', args=()))
