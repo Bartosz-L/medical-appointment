@@ -136,7 +136,7 @@ class Appointment(models.Model):
     month = models.CharField(max_length=2, default='')  # '12'
     day = models.CharField(max_length=2, default='')  # '01'
     year = models.CharField(max_length=4, default='')  # '2019'
-    appointmentTime = models.CharField(max_length=5, default='')  # '05:30'
+    appttime = models.CharField(max_length=5, default='')  # '05:30'
     phase = models.CharField(max_length=2, default='')  # 'AM' or 'PM'
     patient = models.ForeignKey(Patient, null=True, on_delete=models.PROTECT)
     location = models.ForeignKey(Hospital, null=True, on_delete=models.PROTECT)

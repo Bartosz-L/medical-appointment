@@ -28,7 +28,7 @@ class ModelsTests(TestCase):
         doctor = Doctor.objects.create(username="Doctor", workplace=Hopsital)
         nurse = Nurse.objects.create(username="Nurse", workplace=Hopsital)
         admin = Administrator.objects.create(username="Admin", workplace=Hopsital)
-        appointment = Appointment.objects.create(appointmentTime="05:30", patient=patient, location=Hopsital, doctor=doctor)
+        appointment = Appointment.objects.create(appttime="05:30", patient=patient, location=Hopsital, doctor=doctor)
         test = Test.objects.create(name="TestingTest", doctor=doctor, patient=patient)
         pre = Prescription.objects.create(name="TestingPrescription", doctor=doctor, patient=patient)
 
@@ -47,19 +47,19 @@ class ModelsTests(TestCase):
         self.assertEqual(patient.getHospital(patient), hospital)
 
     def test_getApptPatient(self):
-        appointmentTime = Appointment.objects.get(appointmentTime="05:30")
+        appt = Appointment.objects.get(appttime="05:30")
         patient = Patient.objects.get(username="Patient")
-        self.assertEqual(appointmentTime.getPatient(appointmentTime), patient)
+        self.assertEqual(appt.getPatient(appt), patient)
 
     def test_getApptDoctor(self):
         doctor = Doctor.objects.get(username="Doctor")
-        appointmentTime = Appointment.objects.get(appointmentTime="05:30")
-        self.assertEqual(appointmentTime.getDoctor(appointmentTime), doctor)
+        appt = Appointment.objects.get(appttime="05:30")
+        self.assertEqual(appt.getDoctor(appt), doctor)
 
     def test_getApptLocation(self):
         location = Hospital.objects.get(name="hospital1")
-        appointmentTime = Appointment.objects.get(appointmentTime="05:30")
-        self.assertEqual(appointmentTime.getLocation(appointmentTime), location)
+        appt = Appointment.objects.get(appttime="05:30")
+        self.assertEqual(appt.getLocation(appt), location)
 
     def test_getTestDoctor(self):
         doctor = Doctor.objects.get(username="Doctor")

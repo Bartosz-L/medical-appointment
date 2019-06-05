@@ -1,0 +1,371 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}CREATE APPOINTMENT{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-5 mb-5 justify-content-md-center">
+      <div class="col-10">
+        {% if error_message %}
+          <div id="alert">
+            <strong>{{ error_message }}</strong>
+          </div>
+        {% endif %}
+
+        {% if type == "Patient" %}
+          <h3>Create Your Appointment Below</h3>
+          <form name='createAppointment' action="{% url 'appointments_app:createAppointmentInfo' %}" method="post"
+                onsubmit="return checkform();">
+            {% csrf_token %}
+
+            <ul>
+              <li class="form">To create your appointment, complete the form below</li>
+              <li class="form">As a Patient, you must select a doctor and enter a date and a time.</li>
+            </ul>
+            <hr>
+
+            <div class="form-group">
+              You are the patient:
+              <select name='patient' class="form-control">
+                <option name="pat" value="{{ patient.id }}"
+                        selected>{{ patient.firstName }} {{ patient.lastName }}</option>
+              </select>
+              Select a Doctor:
+              <select name='doctor' class="form-control">
+                <option name="placeholder" value="Please Select a Doctor" selected disabled hidden>Please Select a
+                  Doctor
+                </option>
+                {% for doc in doctors %}
+                  <option name="doc" value="{{ doc.id }}">{{ doc.lastName }}, {{ doc.firstName }}</option>
+                {% endfor %}
+              </select>
+              Month:
+              <select name='month' class="form-control">
+                <option name="placeholder" value="Please Select a Month" selected disabled hidden>Please Select a Month
+                </option>
+                <option name="amonth" value="01">January</option>
+                <option name="amonth" value="02">February</option>
+                <option name="amonth" value="03">March</option>
+                <option name="amonth" value="04">April</option>
+                <option name="amonth" value="05">May</option>
+                <option name="amonth" value="06">June</option>
+                <option name="amonth" value="07">July</option>
+                <option name="amonth" value="08">August</option>
+                <option name="amonth" value="09">September</option>
+                <option name="amonth" value="10">October</option>
+                <option name="amonth" value="11">November</option>
+                <option name="amonth" value="12">December</option>
+              </select>
+              <div class="form-inline mt-2">
+                <label class="form-label pr-2" for="day">Day:</label>
+                <input id="day" type="text" name="day" placeholder="Ex.) 01" class="form-control"/>
+                <label class="form-label pl-2 pr-2" for="year">Year:</label>
+                <input id="year" type="text" name="year" placeholder="Ex.) 2019" class="form-control"/>
+
+              </div>
+              <div class="form-inline mt-2">
+                <label class="form-label pr-2" for="time">Select a Time:</label>
+                <select name='appttime' class="form-control" id="time">
+                  <option name="tplaceholder" value="Please Select a Time" selected disabled hidden>Please Select a Time
+                  </option>
+                  <option name="atime" value="01:00">01:00</option>
+                  <option name="atime" value="01:30">01:30</option>
+                  <option name="atime" value="02:00">02:00</option>
+                  <option name="atime" value="02:30">02:30</option>
+                  <option name="atime" value="03:00">03:00</option>
+                  <option name="atime" value="03:30">03:30</option>
+                  <option name="atime" value="04:00">04:00</option>
+                  <option name="atime" value="04:30">04:30</option>
+                  <option name="atime" value="05:00">05:00</option>
+                  <option name="atime" value="05:30">05:30</option>
+                  <option name="atime" value="06:00">06:00</option>
+                  <option name="atime" value="06:30">06:30</option>
+                  <option name="atime" value="07:00">07:00</option>
+                  <option name="atime" value="07:30">07:30</option>
+                  <option name="atime" value="08:00">08:00</option>
+                  <option name="atime" value="08:30">08:30</option>
+                  <option name="atime" value="09:00">09:00</option>
+                  <option name="atime" value="09:30">09:30</option>
+                  <option name="atime" value="10:00">10:00</option>
+                  <option name="atime" value="10:30">10:30</option>
+                  <option name="atime" value="11:00">11:00</option>
+                  <option name="atime" value="11:30">11:30</option>
+                  <option name="atime" value="12:00">12:00</option>
+                  <option name="atime" value="12:30">12:30</option>
+                </select>
+                <label class="form-label pl-2 pr-2" for="timephase">AM/PM:</label>
+                <select name='phase' class="form-control" id="timephase">
+                  <option name="placeholder" value="Please Select a Time Phase" selected disabled hidden>Please Select a
+                    Time Phase
+                  </option>
+                  <option name="AMphase" value="AM">AM</option>
+                  <option name="PMphase" value="PM">PM</option>
+                </select>
+              </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block m-1" value="Save">Save</button>
+          </form>
+
+          <form action="{% url 'appointments_app:appointments' %}">
+            <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+          </form>
+        {% endif %}
+
+        {% if type == "Doctor" %}
+          <h3>Create Your Appointment Below</h3>
+          <form name='createAppointment' action="{% url 'appointments_app:createAppointmentInfo' %}" method="post"
+                onsubmit="return checkform();">
+            {% csrf_token %}
+
+            <ul>
+              <li class="form">To create your appointment, complete the form below</li>
+              <li class="form">As a Doctor, you must select a patient and enter a date and a time.</li>
+            </ul>
+            <hr>
+
+            <div class="form-group">
+              Select a Patient:
+              <select class="form-control" name='patient'>
+                <option name="placeholder" value="Please Select a Patient" selected disabled hidden>Please Select a
+                  Patient
+                </option>
+                {% for patient in patients %}
+                  <option name="pat" value="{{ patient.id }}">{{ patient.lastName }}, {{ patient.firstName }}</option>
+                {% endfor %}
+              </select>
+              You are the doctor:
+              <select class="form-control" name='doctor'>
+                <option name="pat" value="{{ doctor.id }}"
+                        selected>{{ doctor.firstName }} {{ doctor.lastName }}</option>
+              </select>
+              Month:
+              <select class="form-control" name='month'>
+                <option name="aplaceholder" value="Please Select a Month" selected disabled hidden>Please Select a Month
+                </option>
+                <option name="amonth" value="01">January</option>
+                <option name="amonth" value="02">February</option>
+                <option name="amonth" value="03">March</option>
+                <option name="amonth" value="04">April</option>
+                <option name="amonth" value="05">May</option>
+                <option name="amonth" value="06">June</option>
+                <option name="amonth" value="07">July</option>
+                <option name="amonth" value="08">August</option>
+                <option name="amonth" value="09">September</option>
+                <option name="amonth" value="10">October</option>
+                <option name="amonth" value="11">November</option>
+                <option name="amonth" value="12">December</option>
+              </select>
+              <div class="form-inline mt-2">
+                <label class="form-label pr-2" for="day">Day:</label>
+                <input id="day" type="text" name="day" placeholder="Ex.) 01" class="form-control"/>
+                <label class="form-label pl-2 pr-2" for="year">Year:</label>
+                <input id="year" type="text" name="year" placeholder="Ex.) 2019" class="form-control"/>
+
+              </div>
+              <div class="form-inline mt-2">
+                <label class="form-label pr-2" for="time">Select a Time:</label>
+                <select name='appttime' class="form-control" id="time">
+                  <option name="tplaceholder" value="Please Select a Time" selected disabled hidden>Please Select a Time
+                  </option>
+                  <option name="atime" value="01:00">01:00</option>
+                  <option name="atime" value="01:30">01:30</option>
+                  <option name="atime" value="02:00">02:00</option>
+                  <option name="atime" value="02:30">02:30</option>
+                  <option name="atime" value="03:00">03:00</option>
+                  <option name="atime" value="03:30">03:30</option>
+                  <option name="atime" value="04:00">04:00</option>
+                  <option name="atime" value="04:30">04:30</option>
+                  <option name="atime" value="05:00">05:00</option>
+                  <option name="atime" value="05:30">05:30</option>
+                  <option name="atime" value="06:00">06:00</option>
+                  <option name="atime" value="06:30">06:30</option>
+                  <option name="atime" value="07:00">07:00</option>
+                  <option name="atime" value="07:30">07:30</option>
+                  <option name="atime" value="08:00">08:00</option>
+                  <option name="atime" value="08:30">08:30</option>
+                  <option name="atime" value="09:00">09:00</option>
+                  <option name="atime" value="09:30">09:30</option>
+                  <option name="atime" value="10:00">10:00</option>
+                  <option name="atime" value="10:30">10:30</option>
+                  <option name="atime" value="11:00">11:00</option>
+                  <option name="atime" value="11:30">11:30</option>
+                  <option name="atime" value="12:00">12:00</option>
+                  <option name="atime" value="12:30">12:30</option>
+                </select>
+                <label class="form-label pl-2 pr-2" for="timephase">AM/PM:</label>
+                <select name='phase' class="form-control" id="timephase">
+                  <option name="placeholder" value="Please Select a Time Phase" selected disabled hidden>Please Select a
+                    Time Phase
+                  </option>
+                  <option name="AMphase" value="AM">AM</option>
+                  <option name="PMphase" value="PM">PM</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block m-1" value="Save">Save</button>
+          </form>
+
+          <form action="{% url 'appointments_app:appointments' %}">
+            <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+          </form>
+        {% endif %}
+
+        {% if type == "Nurse" %}
+          <h3>Create An Appointment Below</h3>
+          <form name='createAppointment' action="{% url 'appointments_app:createAppointmentInfo' %}" method="post"
+                onsubmit="return checkform();">
+            {% csrf_token %}
+
+            <ul>
+              <li class="form">To create the appointment, complete the form below</li>
+              <li class="form">As a Nurse, you must select a patient, select a doctor from your hospital, and enter a
+                date
+                and a time.
+              </li>
+            </ul>
+            <hr>
+
+            <div class="form-group">
+              Select a Patient:
+              <select class="form-control" name='patient'>
+                <option name="placeholder" value="Please Select a Patient" selected disabled hidden>Please Select a
+                  Patient
+                </option>
+                {% for patient in patients %}
+                  <option name="pat" value="{{ patient.id }}">{{ patient.lastName }}, {{ patient.firstName }}</option>
+                {% endfor %}
+              </select>
+              Select a Doctor:
+              <select class="form-control" name='doctor'>
+                <option name="placeholder" value="Please Select a Doctor" selected disabled hidden>Please Select a
+                  Doctor
+                </option>
+                {% for doc in doctors %}
+                  <option name="doc" value="{{ doc.id }}">{{ doc.lastName }}, {{ doc.firstName }}</option>
+                {% endfor %}
+              </select>
+              Month:
+              <select class="form-control" name='month'>
+                <option name="placeholder" value="Please Select a Month" selected disabled hidden>Please Select a Month
+                </option>
+                <option name="amonth" value="01">January</option>
+                <option name="amonth" value="02">February</option>
+                <option name="amonth" value="03">March</option>
+                <option name="amonth" value="04">April</option>
+                <option name="amonth" value="05">May</option>
+                <option name="amonth" value="06">June</option>
+                <option name="amonth" value="07">July</option>
+                <option name="amonth" value="08">August</option>
+                <option name="amonth" value="09">September</option>
+                <option name="amonth" value="10">October</option>
+                <option name="amonth" value="11">November</option>
+                <option name="amonth" value="12">December</option>
+              </select>
+              <div class="form-inline mt-2">
+                <label class="form-label pr-2" for="day">Day:</label>
+                <input id="day" type="text" name="day" placeholder="Ex.) 01" class="form-control"/>
+                <label class="form-label pl-2 pr-2" for="year">Year:</label>
+                <input id="year" type="text" name="year" placeholder="Ex.) 2019" class="form-control"/>
+
+              </div>
+              <div class="form-inline mt-2">
+                <label class="form-label pr-2" for="time">Select a Time:</label>
+                <select name='appttime' class="form-control" id="time">
+                  <option name="tplaceholder" value="Please Select a Time" selected disabled hidden>Please Select a Time
+                  </option>
+                  <option name="atime" value="01:00">01:00</option>
+                  <option name="atime" value="01:30">01:30</option>
+                  <option name="atime" value="02:00">02:00</option>
+                  <option name="atime" value="02:30">02:30</option>
+                  <option name="atime" value="03:00">03:00</option>
+                  <option name="atime" value="03:30">03:30</option>
+                  <option name="atime" value="04:00">04:00</option>
+                  <option name="atime" value="04:30">04:30</option>
+                  <option name="atime" value="05:00">05:00</option>
+                  <option name="atime" value="05:30">05:30</option>
+                  <option name="atime" value="06:00">06:00</option>
+                  <option name="atime" value="06:30">06:30</option>
+                  <option name="atime" value="07:00">07:00</option>
+                  <option name="atime" value="07:30">07:30</option>
+                  <option name="atime" value="08:00">08:00</option>
+                  <option name="atime" value="08:30">08:30</option>
+                  <option name="atime" value="09:00">09:00</option>
+                  <option name="atime" value="09:30">09:30</option>
+                  <option name="atime" value="10:00">10:00</option>
+                  <option name="atime" value="10:30">10:30</option>
+                  <option name="atime" value="11:00">11:00</option>
+                  <option name="atime" value="11:30">11:30</option>
+                  <option name="atime" value="12:00">12:00</option>
+                  <option name="atime" value="12:30">12:30</option>
+                </select>
+                <label class="form-label pl-2 pr-2" for="timephase">AM/PM:</label>
+                <select name='phase' class="form-control" id="timephase">
+                  <option name="placeholder" value="Please Select a Time Phase" selected disabled hidden>Please Select a
+                    Time Phase
+                  </option>
+                  <option name="AMphase" value="AM">AM</option>
+                  <option name="PMphase" value="PM">PM</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block m-1" value="Save">Save</button>
+          </form>
+
+          <form action="{% url 'appointments_app:appointments' %}">
+            <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    const checkform = () => {
+      if (document.createAppointment.doctor.value === "Please Select a Doctor") {
+        alert("Please select a doctor");
+        return false;
+      } else if (document.createAppointment.patient.value === "Please Select a Patient") {
+        alert("Please select a patient");
+        return false;
+      } else if (document.createAppointment.appttime.value === "Please Select a Time") {
+        alert("Please select a time");
+        return false;
+      } else if (document.createAppointment.phase.value === "Please Select a Time Phase") {
+        alert("Please select AM or PM");
+        return false;
+      } else if (!validateNumbers(document.createAppointment.day.value)) {
+        alert("Please enter a day that consists only of numbers");
+        return false;
+      } else if (document.createAppointment.day.value.length !== 2) {
+        alert("Please input a 2 character value for day");
+        return false;
+      } else if ((parseInt(document.createAppointment.day.value) < 0) || (parseInt(document.createAppointment.day.value) > 31)) {
+        alert("Please input a valid value for day (Between 1 and 31)");
+        return false;
+      } else if (!validateNumbers(document.createAppointment.year.value)) {
+        alert("Please enter a year that consists only of numbers");
+        return false;
+      } else if (document.createAppointment.year.value.length !== 4) {
+        alert("Please input a 4 character value for year");
+        return false;
+      } else if (parseInt(document.createAppointment.year.value) < 2019) {
+        alert("Please input a valid value for year. A valid year is 2019 or higher");
+        return false;
+      } else {
+        alert("Your appointment will now be created");
+        return true;
+      }
+    };
+
+    const validateNumbers = (number) => {
+      let re = /^([0-9]+)$/;
+      return re.test(number);
+    }
+  </script>
+{% endblock javascripts %}

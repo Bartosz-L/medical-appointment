@@ -17,3 +17,13 @@ User patient logged in - logged on 06/05/19 @ 12:52:34
 User patient logged in - logged on 06/05/19 @ 13:00:16
 User patient logged out - logged on: 06/05/19 @ 13:32:44
 User patient logged in - logged on 06/05/19 @ 13:32:58
+User patient logged in - logged on 06/05/19 @ 14:20:51
+User  logged out - logged on: 06/05/19 @ 14:32:04
+User patient logged in - logged on 06/05/19 @ 14:32:10
+User  logged out - logged on: 06/05/19 @ 14:34:34
+User patient logged in - logged on 06/05/19 @ 14:34:41
+User patient logged out - logged on: 06/05/19 @ 15:49:29
+User doctor1 logged in - logged on 06/05/19 @ 15:50:16
+User doctor1 created an appointment at Hospital 1 on 12,01,2019 08:00 AM - logged on: 06/05/19 @ 15:51:38
+User doctor1 logged out - logged on: 06/05/19 @ 15:51:45
+User patient logged in - logged on 06/05/19 @ 15:51:55
