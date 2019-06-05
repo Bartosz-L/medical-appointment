@@ -32,7 +32,7 @@ class Patient(models.Model):
     address = models.CharField(max_length=100, default='')
     email = models.CharField(max_length=100, default='')
     provider = models.CharField(max_length=100, default='')
-    insuranceId = models.CharField(max_length=12, default='')
+    insuranceid = models.CharField(max_length=12, default='')
     contact = models.ForeignKey(EmergencyContact, null=True, on_delete=models.CASCADE)
     height = models.CharField(max_length=7, default='')
     weight = models.CharField(max_length=6, default='')

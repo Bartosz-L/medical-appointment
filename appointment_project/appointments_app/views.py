@@ -58,7 +58,7 @@ def createPatientLogIn(request):
     number = (request.POST['number'])
     email = (request.POST['email'])
     provider = (request.POST['provider'])
-    insuranceId = (request.POST['insuranceId'])
+    insuranceid = (request.POST['insuranceid'])
     contactfname = (request.POST['contactfname'])
     contactlname = (request.POST['contactlname'])
     contactaddress = (request.POST['contactaddress'])
@@ -90,7 +90,7 @@ def createPatientLogIn(request):
         patient.number = number
         patient.email = email
         patient.provider = provider
-        patient.insuranceId = insuranceId
+        patient.insuranceid = insuranceid
         patient.contact = contact
         patient.height = height
         patient.weight = weight
@@ -317,7 +317,7 @@ def updateProfileInfo(request):
     number = (request.POST['number'])
     email = (request.POST['email'])
     provider = (request.POST['provider'])
-    insuranceId = (request.POST['insuranceId'])
+    insuranceid = (request.POST['insuranceid'])
     contactfname = (request.POST['contactfname'])
     contactlname = (request.POST['contactlname'])
     contactaddress = (request.POST['contactaddress'])
@@ -384,7 +384,7 @@ def export(request):
     filewriter.writerow(['', 'Name', 'Email', 'Address', 'Phone Number', 'Insurance ID', 'Insurance Provider'])
     filewriter.writerow(
         ['Patient Profile Info:', patient.lastName + "," + patient.firstName, patient.email, patient.address,
-         patient.number, patient.insuranceId, patient.provider])
+         patient.number, patient.insuranceid, patient.provider])
     filewriter.writerow([''])
     filewriter.writerow(['', 'Name', 'Address', 'Phone Number'])
     filewriter.writerow(['Patient Emergency Contact:', patient.contact.lastName + ", " + patient.contact.firstName,

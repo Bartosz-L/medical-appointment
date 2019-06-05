@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
                 ('address', models.CharField(default='', max_length=100)),
                 ('email', models.CharField(default='', max_length=100)),
                 ('provider', models.CharField(default='', max_length=100)),
-                ('insuranceId', models.CharField(default='', max_length=12)),
+                ('insuranceid', models.CharField(default='', max_length=12)),
                 ('height', models.CharField(default='', max_length=7)),
                 ('weight', models.CharField(default='', max_length=6)),
                 ('allergies', models.TextField(default='', max_length=500)),

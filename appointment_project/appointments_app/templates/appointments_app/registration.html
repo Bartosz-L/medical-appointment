@@ -45,61 +45,61 @@
       } else if (!validateEmail(document.register.email.value)) {
         alert(document.register.email.value + " is incorrectly formatted, use example@email.com/net/org/etc. instead");
         return false;
-      } else if (document.register.provider.value.length == 0) {
+      } else if (document.register.provider.value.length === 0) {
         alert("Please enter an insurance provider");
         return false;
-      } else if (document.register.insuranceid.value.length == 0) {
+      } else if (document.register.insuranceid.value.length === 0) {
         alert("Please enter an insurance ID number");
         return false;
       } else if (!validateID(document.register.insuranceid.value)) {
         alert("Your ID is improperly formatted. Use 3 letters followed by 9 digits");
         return false;
-      } else if (document.register.contactfname.value.length == 0) {
+      } else if (document.register.contactfname.value.length === 0) {
         alert("You must enter a first name for your contact");
         return false;
       } else if (!validateWord(document.register.contactfname.value)) {
         alert("Please enter a valid first name for your contact(No numbers)");
         return false;
-      } else if (document.register.contactlname.value.length == 0) {
+      } else if (document.register.contactlname.value.length === 0) {
         alert("You must enter a last name for your contact");
         return false;
       } else if (!validateWord(document.register.contactlname.value)) {
         alert("Please enter a valid last name for your contact(No numbers)");
         return false;
-      } else if (document.register.contactaddress.value.length == 0) {
+      } else if (document.register.contactaddress.value.length === 0) {
         alert(" Please enter an address for your contact");
         return false;
-      } else if (document.register.contactnumber.value.length == 0) {
+      } else if (document.register.contactnumber.value.length === 0) {
         alert("Please enter a phone number for your contact");
         return false;
       } else if (!validatePhone(document.register.contactnumber.value)) {
         alert(document.register.contactnumber.value + " is incorrectly formatted, use (123)456-7890 instead");
         return false;
-      } else if (document.register.height.value.length == 0) {
+      } else if (document.register.height.value.length === 0) {
         alert("Please enter a height");
         return false;
       } else if (!validateHeight(document.register.height.value)) {
         alert(document.register.height.value + " is incorrectly formatted, use  0\'00\" instead");
         return false;
-      } else if (document.register.weight.value.length == 0) {
+      } else if (document.register.weight.value.length === 0) {
         alert("Please enter a weight");
         return false;
       } else if (!validateWeight(document.register.weight.value)) {
         alert(document.register.weight.value + " is incorrectly formatted, use  000.00 instead");
         return false;
-      } else if (document.register.allergies.value.length == 0) {
+      } else if (document.register.allergies.value.length === 0) {
         alert("Please enter None if there are no allergies");
         return false;
-      } else if (document.register.gender.value == "Please Select a Gender") {
+      } else if (document.register.gender.value === "Please Select a Gender") {
         alert("Please select a valid gender");
         return false;
-      } else if (document.register.username.value.length == 0) {
+      } else if (document.register.username.value.length === 0) {
         alert("You must input a username");
         return false;
       } else if (document.register.username.length > 30) {
         alert("Your username is too large, please make it 30 characters or smaller");
         return false;
-      } else if (document.register.password.value.length == 0) {
+      } else if (document.register.password.value.length === 0) {
         alert("You must input a password");
         return false;
       } else if (document.register.password.value.length < 12) {
@@ -123,7 +123,7 @@
       } else if (document.register.password.value.indexOf(document.register.username.value) > -1) {
         alert("Your password cannot contain your username");
         return false;
-      } else if (!(document.register.password.value == document.register.match.value)) {
+      } else if (!(document.register.password.value === document.register.match.value)) {
         alert("You failed to confirm your password, please try again.");
         return false;
       } else {
@@ -224,7 +224,7 @@
         Enter your insurance provider:
         <input type="text" name="provider" style="display: block" placeholder="Ex.) Excellus Blue Cross Blue Shield"/>
         Enter your insurance ID number:
-        <input type="text" name="insuranceId" style="display: block" placeholder="Ex.) ABC012345678"/>
+        <input type="text" name="insuranceid" style="display: block" placeholder="Ex.) ABC012345678"/>
       </div>
 
       <div id="eCont" class="tabcontent">
