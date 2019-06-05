@@ -1,98 +1,32 @@
-<!DOCTYPE html>
-<html>
+{% extends "appointments_app/base.html" %}
+{% block title %}HOME{% endblock title %}
 
-{% load staticfiles %}
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
 
-{# Load the tag library #}
-{% load bootstrap4 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
-<link rel='shortcut icon' href={% static 'images/favicon.ico' %}/>
-
-<head>
-  {% load staticfiles %}
-
-  {# Load the tag library #}
-  {% load bootstrap4 %}
-
-  {# Load CSS and JavaScript #}
-  {% bootstrap_css %}
-  {% bootstrap_javascript jquery='full' %}
-
-  {# Display django.contrib.messages as Bootstrap alerts #}
-  {% bootstrap_messages %}
-  <title>Appointments App | Home</title>
-</head>
-
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-          aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'appointments_app:home' %}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      {% if type == "Administrator" %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:log' %}">Activity Log</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:statistics' %}">Statistics</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:registerDoctorNurse' %}">Staff Registration</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:messages' %}">Messages</a>
-        </li>
-      {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:information' %}">User Information</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:appointments' %}">Manage Appointments</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:prescriptions' %}">Prescriptions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:calendar' %}">Calendar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments_app:messages' %}">Messages</a>
-        </li>
-      {% endif %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'appointments_app:logout' %}">log out</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container">
-  {% if error_message %}
-    <div id="alert">
-      <strong>{{ error_message }}</strong>
+{% block content %}
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        {% if error_message %}
+          <div id="alert">
+            <strong>{{ error_message }}</strong>
+          </div>
+        {% endif %}
+        <h1> Welcome, {{ type }}:</h1>
+        <h4>{{ user.lastName }}, {{ user.firstName }}</h4>
+        <hr/>
+        <h3>Today is:</h3>
+        <h5 id='date'></h5>
+      </div>
     </div>
-  {% endif %}
-  <h2> Welcome, {{ type }}:</h2>
-  <h3>{{ user.lastName }}, {{ user.firstName }}</h3>
-  <hr/>
-  <h2>Today is:</h2>
-  <h3 id='date'></h3>
-</div>
-<script>
-  let today = new Date;
-  document.getElementById('date').innerHTML = "" + today;
-</script>
-</body>
-</html>
+  </div>
+{% endblock content %}
+
+  {% block javascripts %}
+    <script>
+      let today = new Date;
+      document.getElementById('date').innerHTML = "" + today;
+    </script>
+  {% endblock javascripts %}

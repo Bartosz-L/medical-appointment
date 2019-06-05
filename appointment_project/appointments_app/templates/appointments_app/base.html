@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+
+  {% block head %}
+    {# Load the tag library #}
+    {% load bootstrap4 %}
+
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+
+    {% block meta %}
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock meta %}
+    <title>Appointments App | {% block title %}{% endblock title%}</title>
+    {% block stylesheets %}
+      <link rel='shortcut icon' href={% static 'images/favicon.ico' %}/>
+    {% endblock stylesheets %}
+  {% endblock head %}
+</head>
+
+<body>
+{% block body %}
+  {% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+              aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'appointments_app:home' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          {% if type == "Administrator" %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:log' %}">Activity Log</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:statistics' %}">Statistics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:registerDoctorNurse' %}">Staff Registration</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:messages' %}">Messages</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:information' %}">User Information</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:appointments' %}">Manage Appointments</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:prescriptions' %}">Prescriptions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:calendar' %}">Calendar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'appointments_app:messages' %}">Messages</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments_app:logout' %}">log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  {% endblock navbar %}
+  {% block content %}
+  {% endblock content %}
+
+  {% block javascripts %}
+  {% endblock javascripts %}
+{% endblock body %}
+</body>
+</html>
