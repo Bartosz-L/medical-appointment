@@ -907,7 +907,7 @@ def removePrescriptions(request, pres_id):
     activity = f'Doctor {uname} removed Prescription #{pres_id} - logged on: ' \
         f'{datetime.datetime.now().strftime("%m/%d/%y @ %H:%M:%S")}'
     logActivity(activity)
-    return HttpResponseRedirect(reverse('HealthNet:prescriptions', args=()))
+    return HttpResponseRedirect(reverse('appointments_app:prescriptions', args=()))
 
 
 # This module simply renders the HTML page for the calendar screen.
