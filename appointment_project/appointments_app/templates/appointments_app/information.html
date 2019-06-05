@@ -1,0 +1,249 @@
+{% extends "appointments_app/base.html" %}
+{% load static %}
+
+{% block title %}USER INFO{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  {#  <link rel="stylesheet" href="{% static 'mainPages.css' %}">#}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-5 mb-5 justify-content-md-center">
+      <div class="col-xl-10">
+        {% if type == "Patient" %}
+          <h3>Profile Information</h3>
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Insurance Provider</th>
+              <th>Insurance ID</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ patient.lastName }}, {{ patient.firstName }}</td>
+              <td>{{ patient.address }}</td>
+              <td>{{ patient.number }}</td>
+              <td>{{ patient.email }}</td>
+              <td>{{ patient.provider }}</td>
+              <td>{{ patient.insuranceid }}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <h3>Emergency Contact</h3>
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Phone Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ patient.contact.lastName }}, {{ patient.contact.firstName }}</td>
+              <td>{{ patient.contact.address }}</td>
+              <td>{{ patient.contact.number }}</td>
+            </tr>
+            </tbody>
+          </table>
+
+
+          <form action="{% url 'appointments_app:updateProfile' %}">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" value="Update Profile Information">Update
+              Profile Information
+            </button>
+          </form>
+
+          <hr>
+
+          <h3>Medical Information</h3>
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Allergies</th>
+              <th>Gender</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{ patient.height }}</td>
+              <td>{{ patient.weight }} lbs</td>
+              <td>{{ patient.allergies }}</td>
+              <td>{{ patient.gender }}</td>
+            </tr>
+            </tbody>
+
+          </table>
+
+          <hr>
+
+          <h3>Test Results</h3>
+          {% if tests %}
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th>Test Name</th>
+                <th>Release Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for t in tests %}
+                <tr>
+                  {% if t.released == True %}
+                    <td><a class="alink" href="{% url 'appointments_app:testDetails' t.id %}">{{ t.name }}</a></td>
+                  {% else %}
+                    <td>{{ t.name }}</td>
+                  {% endif %}
+                  {% if t.released == True %}
+                    <td>Test is Released</td>
+                  {% else %}
+                    <td>Not yet Released</td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+              </tbody>
+
+            </table>
+          {% else %}
+            <p>There are no tests to view</p>
+          {% endif %}
+
+          <form action="{% url 'appointments_app:export' %}" onsubmit="return conExport();">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" value="Export Tests and Profile Information">
+              Export Tests and Profile Information
+            </button>
+          </form>
+        {% endif %}
+
+        {% if type != "Patient" %}
+          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, these
+            are
+            the patients at <span style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
+          {% if patw %}
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th>Patient Name</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Allergies</th>
+                <th>Gender</th>
+                {% if type == "Doctor" %}
+                  <th></th>
+                  <th></th>
+                {% endif %}
+              </tr>
+              </thead>
+              <tbody>
+              {% for patient in patients %}
+                {% if patient.hospital == employee.workplace %}
+                  <tr>
+                    <td><a class="alink"
+                           href="{% url 'appointments_app:updateMed' patient.id %}">{{ patient.lastName }}, {{ patient.firstName }}</a>
+                    </td>
+                    <td>{{ patient.height }}</td>
+                    <td>{{ patient.weight }} lbs</td>
+                    <td>{{ patient.allergies }}</td>
+                    <td>{{ patient.gender }}</td>
+                    {% if type == "Doctor" %}
+                      <td>
+                        <form action="{% url 'appointments_app:tests' patient.id %}">
+                          <button type="submit" class="btn btn-primary btn-lg btn-block"
+                                  value="Test Results">Test Results
+                          </button>
+                        </form>
+                      </td>
+                      <td>
+                        <form action="{% url 'appointments_app:discharge' patient.id %}">
+                          <button type="submit" class="btn btn-warning btn-lg btn-block"
+                                  value="Discharge">Discharge
+                          </button>
+                        </form>
+                      </td>
+                    {% endif %}
+                  </tr>
+                {% endif %}
+              {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>There are no patients at your hospital</p>
+          {% endif %}
+
+          <br>
+          <br>
+
+          <h3>Non Admitted Patients</h3>
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Patient Name</th>
+              <th>Current Hospital</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for patient in patients %}
+              {% if patient.hospital.address != employee.workplace.address %}
+                <tr>
+                  {% if type == "Doctor" %}
+                    <td><a class="alink"
+                           href="{% url 'appointments_app:updateMed' patient.id %}">{{ patient.lastName }}, {{ patient.firstName }}</a>
+                    </td>
+                  {% else %}
+                    <td>{{ patient.lastName }}, {{ patient.firstName }}</td>
+                  {% endif %}
+
+                  {% if patient.hospital == None %}
+                    <td>{{ patient.hospital.name }}</td>
+                    <td>
+                      <form action="{% url 'appointments_app:admission' patient.id employee.workplace.id %}"><input
+                          type="submit"
+                          value="Admit"/>
+                      </form>
+                    </td>
+                  {% else %}
+                    {% if type == "Nurse" %}
+                      <td>{{ patient.hospital.name }}</td>
+                    {% endif %}
+                    {% if type == "Doctor" %}
+                      <td>{{ patient.hospital.name }}</td>
+                      <td>
+                        <form action="{% url 'appointments_app:transfer' patient.id employee.workplace.id %}"><input
+                            type="submit" value="Transfer"/></form>
+                      </td>
+                    {% endif %}
+                  {% endif %}
+                </tr>
+              {% endif %}
+            {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script>
+    const conExport = () => {
+      if (confirm("WARNING: The Appointment App Development Team cannot be held responsible if your exported " +
+          "information falls into the wrong hands. Are you sure you want to continue?")) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  </script>
+{% endblock javascripts %}

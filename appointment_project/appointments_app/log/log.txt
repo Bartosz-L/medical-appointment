@@ -8,3 +8,12 @@ User john logged out - logged on: 06/04/19 @ 16:20:46
 User john logged in - logged on 06/05/19 @ 09:41:47
 User admin1 logged in - logged on 06/05/19 @ 11:20:01
 User admin1 logged out - logged on: 06/05/19 @ 11:20:38
+User patient logged in - logged on 06/05/19 @ 11:58:59
+User patient logged out - logged on: 06/05/19 @ 12:07:01
+User  logged out - logged on: 06/05/19 @ 12:07:19
+User patient logged in - logged on 06/05/19 @ 12:07:29
+User  logged out - logged on: 06/05/19 @ 12:52:17
+User patient logged in - logged on 06/05/19 @ 12:52:34
+User patient logged in - logged on 06/05/19 @ 13:00:16
+User patient logged out - logged on: 06/05/19 @ 13:32:44
+User patient logged in - logged on 06/05/19 @ 13:32:58

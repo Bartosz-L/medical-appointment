@@ -20,9 +20,12 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock meta %}
-    <title>Appointments App | {% block title %}{% endblock title%}</title>
+    <title>Appointments App | {% block title %}{% endblock title %}</title>
+
     {% block stylesheets %}
       <link rel='shortcut icon' href={% static 'images/favicon.ico' %}/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
     {% endblock stylesheets %}
   {% endblock head %}
 </head>
@@ -30,48 +33,87 @@
 <body>
 {% block body %}
   {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand active" href="{% url 'appointments_app:home' %}">HOME</a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
               aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'appointments_app:home' %}">Home <span class="sr-only">(current)</span></a>
-          </li>
           {% if type == "Administrator" %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:log' %}">Activity Log</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:log' %}">Activity Log
+                <i class="material-icons px-2">
+                  trending_up
+                </i>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:statistics' %}">Statistics</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:statistics' %}">Statistics
+                <i class="material-icons px-2">
+                  bar_chart
+                </i>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:registerDoctorNurse' %}">Staff Registration</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:registerDoctorNurse' %}">Staff Registration
+                <i class="material-icons px-2">
+                  how_to_reg
+                </i>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:messages' %}">Messages</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:messages' %}">Messages
+                <i class="material-icons px-2">
+                  mail
+                </i>
+              </a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:information' %}">User Information</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:information' %}">User Information
+                <i class="material-icons px-2">
+                  info
+                </i>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:appointments' %}">Manage Appointments</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:appointments' %}">Manage Appointments
+                <i class="material-icons px-2">
+                  assignment_ind
+                </i>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:prescriptions' %}">Prescriptions</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:prescriptions' %}">Prescriptions
+                <i class="material-icons px-2">
+                  assignment
+                </i>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:calendar' %}">Calendar</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:calendar' %}">Calendar
+                <i class="material-icons px-2">
+                  calendar_today
+                </i>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'appointments_app:messages' %}">Messages</a>
+              <a class="nav-link d-flex" href="{% url 'appointments_app:messages' %}">Messages
+                <i class="material-icons px-2">
+                  mail
+                </i>
+              </a>
             </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'appointments_app:logout' %}">log out</a>
+            <a class="nav-link d-flex" href="{% url 'appointments_app:logout' %}">Log Out
+              <i class="material-icons px-2">
+                power_settings_new
+              </i>
+            </a>
           </li>
         </ul>
       </div>
