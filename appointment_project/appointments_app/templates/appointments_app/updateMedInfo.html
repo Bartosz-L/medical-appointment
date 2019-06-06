@@ -1,0 +1,104 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}UPDATE MED INFO{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-12">
+        <h3>Update Patient Medical Information</h3>
+        <form name='update' action="{% url 'appointments_app:updateMedInfo' patient.id %}" method="post"
+              onsubmit="return checkform();">
+          {% csrf_token %}
+
+          <ul>
+            <li>To update medical information, complete the form below</li>
+          </ul>
+
+          <div class="form-group">
+            Enter patient's height (0'00" or 0'0"):
+            <input class="form-control" type="text" value="{{ patient.height }}" name="height" placeholder="Ex.) 0'00"/>
+            Enter patient's weight (000.00 or 00.00):
+            <input class="form-control" type="text" value="{{ patient.weight }}" name="weight"
+                   placeholder="Ex.) 000.00 or 00.00"/>
+            Enter any allergies the patient has:
+            <input class="form-control" type="text" value="{{ patient.allergies }}" name="allergies"
+                   placeholder="Ex.) Tree Nut, Asthma, Cats, etc."/>
+            Select patient's gender:
+            <select class="form-control" name='gender'>
+              {% if patient.gender == "" %}
+                <option name="placeholder" value="Please Select a Gender" selected disabled hidden>Please Select a
+                  Gender
+                </option>
+                <option name="gender1" value="Male">Male</option>
+                <option name="gender2" value="Female">Female</option>
+                <option name="gender3" value="Other">Other</option>
+              {% elif patient.gender == "Male" %}
+                <option name="gender1" value="Male" selected>Male</option>
+                <option name="gender2" value="Female">Female</option>
+                <option name="gender3" value="Other">Other</option>
+              {% elif patient.gender == "Female" %}
+                <option name="gender1" value="Male">Male</option>
+                <option name="gender2" value="Female" selected>Female</option>
+                <option name="gender3" value="Other">Other</option>
+              {% else %}
+                <option name="gender1" value="Male">Male</option>
+                <option name="gender2" value="Female">Female</option>
+                <option name="gender3" value="Other" selected>Other</option>
+              {% endif %}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
+        </form>
+
+        <form action="{% url 'appointments_app:information' %}">
+          <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    function checkform() {
+      if (!validateHeight(document.update.height.value)) {
+        alert(document.update.height.value + " is incorrectly formatted, use  0\'00\" instead");
+        return false;
+      } else if (!validateWeight(document.update.weight.value)) {
+        alert(document.update.weight.value + " is incorrectly formatted, use  000.00 instead");
+        return false;
+      } else if (document.update.allergies.value.length === 0) {
+        alert("Please enter None if there are no allergies");
+        return false;
+      } else if (!validateAllergies(document.update.allergies.value)) {
+        alert(document.update.allergies.value + " is incorrectly formatted, use Allergy #1, Allergy #2, Allergy #3 instead");
+        return false;
+      } else if (document.update.gender.value === "Please Select a Gender") {
+        alert("Please select a valid gender");
+        return false;
+      } else {
+        alert("Medical Information will now be updated");
+        return true;
+      }
+    }
+
+    function validateHeight(height) {
+      var re = /^\d'(\d{1,2}")?$/;
+      return re.test(height);
+    }
+
+    function validateWeight(weight) {
+      var re = /^([1-9]\d|[1-9]\d\d)(\.\d\d)$/;
+      return re.test(weight);
+    }
+
+    function validateAllergies(allergies) {
+      var re = /^([a-zA-Z]+)|([a-zA-Z]+,[ ]*[a-zA-Z]*)|([a-zA-Z]*[ ][a-zA-Z]*)$/;
+      return re.test(allergies);
+    }
+  </script>
+{% endblock javascripts %}

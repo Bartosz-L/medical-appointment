@@ -77,7 +77,7 @@
             <tbody>
             <tr>
               <td>{{ patient.height }}</td>
-              <td>{{ patient.weight }} lbs</td>
+              <td>{{ patient.weight }} kg</td>
               <td>{{ patient.allergies }}</td>
               <td>{{ patient.gender }}</td>
             </tr>
@@ -152,7 +152,7 @@
                            href="{% url 'appointments_app:updateMed' patient.id %}">{{ patient.lastName }}, {{ patient.firstName }}</a>
                     </td>
                     <td>{{ patient.height }}</td>
-                    <td>{{ patient.weight }} lbs</td>
+                    <td>{{ patient.weight }} kg</td>
                     <td>{{ patient.allergies }}</td>
                     <td>{{ patient.gender }}</td>
                     {% if type == "Doctor" %}

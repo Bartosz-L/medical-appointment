@@ -42,3 +42,7 @@ User patient logged in - logged on 06/06/19 @ 11:06:06
 User  logged out - logged on: 06/06/19 @ 11:09:26
 User patient logged in - logged on 06/06/19 @ 11:09:33
 User patient updated their profile info - logged on: 06/06/19 @ 11:35:01
+User patient logged out - logged on: 06/06/19 @ 12:04:42
+User doctor1 logged in - logged on 06/06/19 @ 12:04:51
+User doctor1 updated Patient patient's medical information - logged on: 06/06/19 @ 12:05:40
+User doctor1 updated Patient patient's medical information - logged on: 06/06/19 @ 12:07:32
