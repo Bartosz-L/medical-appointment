@@ -1,0 +1,44 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}STATISTICS{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div id="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-10">
+        <h3>System Statistics</h3>
+
+        <table class="table table-striped">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">ADMINS</th>
+            <th scope="col">DOCTORS</th>
+            <th scope="col">NURSES</th>
+            <th scope="col">PATIENTS</th>
+            <th scope="col">PRESCRIPTIONS</th>
+            <th scope="col">APPOINTMENTS</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">#</th>
+            <td>{{ admins }}</td>
+            <td>{{ doctors }}</td>
+            <td>{{ nurses }}</td>
+            <td>{{ patients }}</td>
+            <td>{{ prescriptions }}</td>
+            <td>{{ appointments }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}
