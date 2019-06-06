@@ -46,3 +46,6 @@ User patient logged out - logged on: 06/06/19 @ 12:04:42
 User doctor1 logged in - logged on 06/06/19 @ 12:04:51
 User doctor1 updated Patient patient's medical information - logged on: 06/06/19 @ 12:05:40
 User doctor1 updated Patient patient's medical information - logged on: 06/06/19 @ 12:07:32
+User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 12:14:13
+User doctor1 logged out - logged on: 06/06/19 @ 12:17:26
+User patient logged in - logged on 06/06/19 @ 12:17:33
