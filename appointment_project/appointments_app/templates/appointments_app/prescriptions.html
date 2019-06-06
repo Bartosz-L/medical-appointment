@@ -1,0 +1,122 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}PRESCRIPTIONS{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-5 mb-5 justify-content-md-center">
+      <div class="col-10">
+        {% if type == "Patient" %}
+          <h3><span style="text-decoration: underline;">{{ patient.firstName }} {{ patient.lastName }}</span>, these are
+            the prescriptions that have been assigned to you</h3>
+        {% elif type == "Doctor" %}
+          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, these
+            are
+            the prescriptions that you have created</h3>
+        {% else %}
+          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, these
+            are
+            the prescriptions for patients at <span
+                style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
+        {% endif %}
+        {% if prescriptions %}
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Name</th>
+              <th>Dosage</th>
+              {% if type == "Patient" %}
+
+              {% else %}
+                <th>Patient</th>
+              {% endif %}
+
+              {% if type == "Doctor" %}
+                <th></th>
+              {% else %}
+                <th>Doctor</th>
+              {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in prescriptions %}
+              <tr>
+                {% if type == "Doctor" %}
+                  <td><a href="{% url 'appointments_app:updatePrescriptions' p.id %}">{{ p.name }}</a></td>
+                {% else %}
+                  <td>{{ p.name }}</td>
+                {% endif %}
+
+                <td>{{ p.dosage }}</td>
+
+                {% if type == "Patient" %}
+
+                {% else %}
+                  <td>{{ p.patient }}</td>
+                {% endif %}
+
+                {% if type == "Doctor" %}
+                  <td>
+                    <form action="{% url 'appointments_app:removePrescriptions' p.id %}">
+                      <button type="submit" class="btn btn-warning m-1" value="Remove">Remove</button>
+                    </form>
+                  </td>
+                {% else %}
+                  <td>{{ p.doctor }}</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>There are no prescriptions to view</p>
+        {% endif %}
+
+        {% if type == "Doctor" %}
+          <h3>These are the prescriptions for patients at <span
+              style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
+          {% if presatw %}
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th>Name</th>
+                <th>Dosage</th>
+                <th>Patient</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for p in presatw %}
+                <tr>
+                  <td><a href="{% url 'appointments_app:updatePrescriptions' p.id %}">{{ p.name }}</a></td>
+                  <td>{{ p.dosage }}</td>
+                  <td>{{ p.patient }}</td>
+                  <td>
+                    <form action="{% url 'appointments_app:removePrescriptions' p.id %}">
+                      <button type="submit" class="btn btn-warning m-1" value="Remove">Remove</button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>There are no prescriptions to view</p>
+          {% endif %}
+
+          <form action="{% url 'appointments_app:createPrescriptions' %}">
+            <button type="submit" class="btn btn-primary btn-block m-1" value="Create Prescription">Create Prescription
+            </button>
+          </form>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}

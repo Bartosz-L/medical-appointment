@@ -27,3 +27,10 @@ User doctor1 logged in - logged on 06/05/19 @ 15:50:16
 User doctor1 created an appointment at Hospital 1 on 12,01,2019 08:00 AM - logged on: 06/05/19 @ 15:51:38
 User doctor1 logged out - logged on: 06/05/19 @ 15:51:45
 User patient logged in - logged on 06/05/19 @ 15:51:55
+User admin1 logged in - logged on 06/06/19 @ 09:07:36
+User admin1 logged out - logged on: 06/06/19 @ 09:07:55
+User patient logged in - logged on 06/06/19 @ 09:08:03
+User patient logged out - logged on: 06/06/19 @ 09:15:46
+User doctor1 logged in - logged on 06/06/19 @ 09:16:18
+User doctor1 logged in - logged on 06/06/19 @ 09:58:04
+Doctor doctor1 created a prescription for Patient patient - logged on: 06/06/19 @ 10:04:05

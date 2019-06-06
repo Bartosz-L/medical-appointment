@@ -22,8 +22,8 @@
             {% csrf_token %}
 
             <ul>
-              <li class="form">To create your appointment, complete the form below</li>
-              <li class="form">As a Patient, you must select a doctor and enter a date and a time.</li>
+              <li>To create your appointment, complete the form below</li>
+              <li>As a Patient, you must select a doctor and enter a date and a time.</li>
             </ul>
             <hr>
 
@@ -107,7 +107,7 @@
               </div>
 
             </div>
-            <button type="submit" class="btn btn-primary btn-block m-1" value="Save">Save</button>
+            <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
           </form>
 
           <form action="{% url 'appointments_app:appointments' %}">
@@ -206,7 +206,7 @@
                 </select>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block m-1" value="Save">Save</button>
+            <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
           </form>
 
           <form action="{% url 'appointments_app:appointments' %}">
@@ -312,7 +312,7 @@
                 </select>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block m-1" value="Save">Save</button>
+            <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
           </form>
 
           <form action="{% url 'appointments_app:appointments' %}">
