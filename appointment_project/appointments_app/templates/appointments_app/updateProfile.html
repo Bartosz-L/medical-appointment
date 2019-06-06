@@ -1,0 +1,167 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}UPDATE PROFILE{% endblock title %}
+{% load static %}
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-5 mb-5 justify-content-md-center">
+      <div class="col-10">
+
+
+        <h1>Update your profile</h1>
+        <h3>To update your profile, complete the form below</h3>
+        <form name='update' action="{% url 'appointments_app:updateProfileInfo' %}" method="post"
+              onsubmit="return checkform();">
+          {% csrf_token %}
+
+
+          <ul class="nav nav-tabs nav-fill mt-5" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                 aria-selected="true">Personal Information</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                 aria-selected="false">Emergency Contact</a>
+            </li>
+
+          </ul>
+          <div class="tab-content mt-4" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div id="pInfo" class="form-group tabcontent">
+                Enter your first name:
+                <input class="form-control" type="text" value="{{ patient.firstName }}" name="firstName"
+                       placeholder="Ex.) First Name"/>
+                Enter your last name:
+                <input class="form-control" type="text" value="{{ patient.lastName }}" name="lastName"
+                       placeholder="Ex.) Last Name"/>
+                Enter your address:
+                <input class="form-control" type="text" value="{{ patient.address }}" name="address"
+                       placeholder="Ex.) 123 Name Street"/>
+                Enter your phone number:
+                <input class="form-control" type="text" value="{{ patient.number }}" name="number"
+                       placeholder="Ex.) (123)456-7890"/>
+                Enter your email address:
+                <input class="form-control" type="text" value="{{ patient.email }}" name="email"
+                       placeholder="Ex.) example@email.com"/>
+                Enter your insurance provider:
+                <input class="form-control" type="text" value="{{ patient.provider }}" name="provider"
+                       placeholder="Ex.) Excellus Blue Cross Blue Shield"/>
+                Enter your insurance ID number:
+                <input class="form-control" type="text" value="{{ patient.insuranceid }}" name="insuranceid"
+                       placeholder="Ex.) ABC012345678"/>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div id="eCont" class="form-group tabcontent">
+                Enter the first name of your contact:
+                <input class="form-control" type="text" value="{{ patient.contact.firstName }}" name="contactfname"
+                       placeholder="Ex.) Jane"/>
+                Enter the last name of your contact:
+                <input class="form-control" type="text" value="{{ patient.contact.lastName }}" name="contactlname"
+                       placeholder="Ex.) Doe"/>
+                Enter the address of your contact:
+                <input class="form-control" type="text" value="{{ patient.contact.address }}" name="contactaddress"
+                       placeholder="Ex.) 123 Name Street"/>
+                Enter the phone number of your contact:
+                <input class="form-control" type="text" value="{{ patient.contact.number }}" name="contactnumber"
+                       placeholder="Ex.) (123)456-7890"/>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
+        </form>
+
+        <form action="{% url 'appointments_app:information' %}">
+          <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    function checkform() {
+      if (document.update.firstName.value.length === 0) {
+        alert("You must enter a first name");
+        return false;
+      } else if (!validateText(document.update.firstName.value)) {
+        alert("Please enter a valid first name (No numbers)");
+        return false;
+      } else if (document.update.lastName.value.length === 0) {
+        alert("You must enter a last name");
+        return false;
+      } else if (!validateText(document.update.lastName.value)) {
+        alert("Please enter a valid last name (No numbers)");
+        return false;
+      } else if (document.update.address.value.length === 0) {
+        alert(" Please enter an address");
+        return false;
+      } else if (!validatePhone(document.update.number.value)) {
+        alert(document.update.number.value + " is incorrectly formatted, use (123)456-7890 instead");
+        return false;
+      } else if (!validateEmail(document.update.email.value)) {
+        alert(document.update.email.value + " is incorrectly formatted");
+        return false;
+      } else if (document.update.provider.value.length === 0) {
+        alert("Please enter an insurance provider");
+        return false;
+      } else if (document.update.insuranceid.value.length === 0) {
+        alert("Please enter an insurance ID number");
+        return false;
+      } else if (!validateID(document.update.insuranceid.value)) {
+        alert("Your ID is improperly formatted. Use 3 letters followed by 9 digits");
+        return false;
+      } else if (document.update.contactfname.value.length === 0) {
+        alert("You must enter a first name for your contact");
+        return false;
+      } else if (!validateText(document.update.contactfname.value)) {
+        alert("Please enter a valid first name for your contact(No numbers)");
+        return false;
+      } else if (document.update.contactlname.value.length === 0) {
+        alert("You must enter a last name for your contact");
+        return false;
+      } else if (!validateText(document.update.contactlname.value)) {
+        alert("Please enter a valid last name for your contact(No numbers)");
+        return false;
+      } else if (document.update.contactaddress.value.length === 0) {
+        alert(" Please enter an address for your contact");
+        return false;
+      } else if (document.update.contactnumber.value.length === 0) {
+        alert("Please enter a phone number for your contact");
+        return false;
+      } else if (!validatePhone(document.update.contactnumber.value)) {
+        alert(document.update.contactnumber.value + " is incorrectly formatted, use (123)456-7890 instead");
+        return false;
+      } else {
+        alert("Your profile will now be updated");
+        return true;
+      }
+    }
+
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+
+    function validatePhone(phone) {
+      var re = /^(\([0-9]{3}\))[0-9]{3}-[0-9]{4}$/;
+      return re.test(phone);
+    }
+
+    function validateText(text) {
+      var re = /^[a-zA-Z\s]+$/;
+      return re.test(text);
+    }
+
+    function validateID(id) {
+      var re = /^([A-Z]{3})([0-9]{9})$/;
+      return re.test(id);
+    }
+  </script>
+{% endblock javascripts %}

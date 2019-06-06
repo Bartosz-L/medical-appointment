@@ -37,3 +37,8 @@ Doctor doctor1 created a prescription for Patient patient - logged on: 06/06/19 
 Doctor doctor1 updated Prescription #1 for Patient patient - logged on: 06/06/19 @ 10:26:03
 User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 10:52:26
 User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 10:52:36
+User doctor1 logged out - logged on: 06/06/19 @ 11:05:57
+User patient logged in - logged on 06/06/19 @ 11:06:06
+User  logged out - logged on: 06/06/19 @ 11:09:26
+User patient logged in - logged on 06/06/19 @ 11:09:33
+User patient updated their profile info - logged on: 06/06/19 @ 11:35:01
