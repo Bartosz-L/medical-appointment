@@ -35,3 +35,5 @@ User doctor1 logged in - logged on 06/06/19 @ 09:16:18
 User doctor1 logged in - logged on 06/06/19 @ 09:58:04
 Doctor doctor1 created a prescription for Patient patient - logged on: 06/06/19 @ 10:04:05
 Doctor doctor1 updated Prescription #1 for Patient patient - logged on: 06/06/19 @ 10:26:03
+User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 10:52:26
+User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 10:52:36
