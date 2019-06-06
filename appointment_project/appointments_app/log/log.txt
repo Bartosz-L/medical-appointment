@@ -34,3 +34,4 @@ User patient logged out - logged on: 06/06/19 @ 09:15:46
 User doctor1 logged in - logged on 06/06/19 @ 09:16:18
 User doctor1 logged in - logged on 06/06/19 @ 09:58:04
 Doctor doctor1 created a prescription for Patient patient - logged on: 06/06/19 @ 10:04:05
+Doctor doctor1 updated Prescription #1 for Patient patient - logged on: 06/06/19 @ 10:26:03

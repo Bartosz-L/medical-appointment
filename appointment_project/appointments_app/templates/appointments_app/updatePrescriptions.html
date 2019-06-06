@@ -1,0 +1,67 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}UPDATE PRESCRIPTION{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-5 mb-5 justify-content-md-center">
+      <div class="col-12">
+        <h3>Update Your Prescription Below</h3>
+        <form name='updatePrescription' action="{% url 'appointments_app:updatePrescriptionsInfo' prescription.id %}"
+              method="post"
+              onsubmit="return checkform();">
+
+          {% csrf_token %}
+
+          <ul>
+            <li>To update your prescription, modify the form below</li>
+          </ul>
+
+          <div class="form-group">
+            <label class="form-label pr-2" for="name">Prescription name:</label>
+            <input id="name" class="form-control" type="text" name="name" value="{{ prescription.name }}"
+                   placeholder="Ex.) Amoxicillin"/>
+            <label class="form-label pr-2" for="dosage">Dosage:</label>
+            <input id="dosage" class="form-control" type="text" name="dosage" value="{{ prescription.dosage }}"
+                   placeholder="Ex.) 1 Every Six Hours"/>
+            <label class="form-label pr-2" for="patient">Select a Patient:</label>
+            <select id="patient" class="form-control" style="display: block" name='patient'>
+              <option name="patient" value="{{ prescription.patient.id }}"
+                      selected>{{ prescription.patient.lastName }}, {{ prescription.patient.firstName }}</option>
+              {% for p in patients %}
+                {% if p.id != prescription.patient.id %}
+                  <option name="patient" value="{{ p.id }}">{{ p.lastName }}, {{ p.firstName }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
+        </form>
+
+        <form action="{% url 'appointments_app:prescriptions' %}">
+          <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    const checkform = () => {
+      if (document.updatePrescription.name.value.length === 0) {
+        alert("Please enter a Prescription name");
+        return false;
+      } else if (document.updatePrescription.dosage.value.length === 0) {
+        alert("Please enter a Dosage");
+        return false;
+      } else {
+        alert("Your prescription will now be updated");
+        return true;
+      }
+    }
+  </script>
+{% endblock javascripts %}
