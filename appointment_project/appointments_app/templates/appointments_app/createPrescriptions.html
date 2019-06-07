@@ -9,35 +9,33 @@
   <div class="container">
     <div class="row mt-5 mb-5 justify-content-md-center">
       <div class="col-10">
-        <h3>Create Your Prescription Below</h3>
+        <h3>Utwórz receptę poniżej</h3>
         <form name='createPrescription' action="{% url 'appointments_app:createPrescriptionsInfo' %}" method="post"
               onsubmit="return checkform();">
           {% csrf_token %}
 
           <ul>
-            <li>To create your prescription, complete the form below</li>
+            <li>Aby utworzyć receptę, wypełnij formularz poniżej.</li>
           </ul>
 
           <div class="from-group">
-            <label class="form-label pr-2" for="name">Prescription name:</label>
+            <label class="form-label pr-2" for="name">Nazwa:</label>
             <input id="name" class="form-control" type="text" name="name" placeholder="Ex.) Amoxicillin"/>
-            <label class="form-label pr-2" for="dosage">Dosage:</label>
+            <label class="form-label pr-2" for="dosage">Dawka:</label>
             <input id="dosage" class="form-control" type="text" name="dosage" placeholder="Ex.) 1 Every Six Hours"/>
-            <label class="form-label pr-2" for="patient">Select Patient:</label>
+            <label class="form-label pr-2" for="patient">Wybierz Pacjenta:</label>
             <select id="patient" class="form-control" style="display: block" name='patient'>
-              <option name="placeholder" value="Please Select a Patient" selected disabled hidden>Please Select a
-                Patient
-              </option>
+              <option name="placeholder" value="Please Select a Patient" selected disabled hidden>Wybierz Pacjenta</option>
               {% for p in patients %}
                 <option name="patient" value="{{ p.id }}">{{ p.lastName }}, {{ p.firstName }}</option>
               {% endfor %}
             </select>
           </div>
-            <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
+            <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Zapisz</button>
         </form>
 
         <form action="{% url 'appointments_app:prescriptions' %}">
-            <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+            <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Anuluj</button>
         </form>
       </div>
 

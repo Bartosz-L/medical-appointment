@@ -15,8 +15,8 @@
         <h3>Calendar</h3>
         <!-- buttons to use month change helper functions -->
         <div class="btn-group btn-group-lg mb-3 d-flex" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary flex-grow-1" onclick="prev_Month(calendar)">PREVIOUS MONTH</button>
-          <button type="button" class="btn btn-secondary flex-grow-1" onclick="next_Month(calendar)">NEXT MONTH</button>
+          <button type="button" class="btn btn-primary flex-grow-1" onclick="prev_Month(calendar)">Poprzeni miesiąc</button>
+          <button type="button" class="btn btn-secondary flex-grow-1" onclick="next_Month(calendar)">Następny miesiąc</button>
         </div>
         <!-- will use this html paragraph element to display calendar -->
         <p id="display"></p>
@@ -84,14 +84,14 @@
       html += '{% if appointments %}';
         html += '<table>';
         html += '<tr>';
-        html += '<th>Date And Time</th>';
-        html += '<th>Location</th>';
-        html += '<th>Patient</th>';
-        html += '<th>Doctor</th>';
+        html += '<th>Data i czas</th>';
+        html += '<th>Lokalizacja</th>';
+        html += '<th>Pacjent</th>';
+        html += '<th>Doktor</th>';
         html += '</tr>';
         html += '{% for appointment in appointments %}';
-          if ((tempmonth == "{{ appointment.month }}") &&
-              ((year).toString() == "{{ appointment.year }}")) {
+          if ((tempmonth === "{{ appointment.month }}") &&
+              ((year).toString() === "{{ appointment.year }}")) {
             html += '<tr>';
             html += '<td>{{ appointment.month }}.{{ appointment.day }}.{{ appointment.year }},' +
                 '&nbsp {{ appointment.appttime }} {{ appointment.phase }}</td>';
@@ -103,7 +103,7 @@
           html += '{% endfor %}';
         html += '</table>';
         html += '{% else %}';
-        html += '<p>You have no appointments in this month.</p>';
+        html += '<p>Brak wizyt w tym miesiącu.</p>';
         html += '{% endif %}';
       return html;
     }
@@ -141,15 +141,15 @@
           for (var c = 0; c <= 6; c++) {
             html += '<td';
             html += '{% for appointment in appointments %}';
-              if ((tempmonth == "{{ appointment.month }}") &&
-                  (day_as_string == "{{ appointment.day }}") &&
-                  ((this.year).toString() == "{{ appointment.year }}") && (found != 'True')) {
+              if ((tempmonth === "{{ appointment.month }}") &&
+                  (day_as_string === "{{ appointment.day }}") &&
+                  ((this.year).toString() === "{{ appointment.year }}") && (found !== 'True')) {
                 html += ' style="background-color:#0D6BB4">';
                 found = 'True';
               }
               html += '{% endfor %}';
             if (cur_day <= month_len && (r > 0 || c >= start_day)) {
-              if (found == 'True')
+              if (found === 'True')
                 html += cur_day;
               else {
                 html += '>';

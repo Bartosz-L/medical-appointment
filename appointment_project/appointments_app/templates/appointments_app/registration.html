@@ -18,28 +18,28 @@
   <link rel='shortcut icon' type='images/favicon href={% static 'images/favicon.ico' %}'/>
   <script type="text/javascript">
     function checkForm() {
-      if (document.register.firstName.value.length == 0) {
+      if (document.register.firstName.value.length === 0) {
         alert("You must enter a first name");
         return false;
       } else if (!validateWord(document.register.firstName.value)) {
         alert("Please enter a valid first name (No numbers)");
         return false;
-      } else if (document.register.lastName.value.length == 0) {
+      } else if (document.register.lastName.value.length === 0) {
         alert("You must enter a last name");
         return false;
       } else if (!validateWord(document.register.lastName.value)) {
         alert("Please enter a valid last name (No numbers)");
         return false;
-      } else if (document.register.address.value.length == 0) {
+      } else if (document.register.address.value.length === 0) {
         alert(" Please enter an address");
         return false;
-      } else if (document.register.number.value.length == 0) {
+      } else if (document.register.number.value.length === 0) {
         alert("Please enter a phone number");
         return false;
       } else if (!validatePhone(document.register.number.value)) {
         alert(document.register.number.value + " is incorrectly formatted, use (123)456-7890 instead");
         return false;
-      } else if (document.register.email.value.length == 0) {
+      } else if (document.register.email.value.length === 0) {
         alert("Please enter an email address");
         return false;
       } else if (!validateEmail(document.register.email.value)) {
@@ -185,8 +185,8 @@
 <body>
 <div class="container">
   <div>
-    <h1>Appointments Registration</h1>
-    <h3>To register, complete the form below</h3>
+    <h1>Rejestracja do aplikacji APPOINTMENTS</h1>
+    <h3>Aby się zarejestrować, wypełnij poniższy formularz.</h3>
 
     {% if error_message %}
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -201,66 +201,64 @@
           onsubmit="return checkForm();">
       {% csrf_token %}
       <ul>
-        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'pInfo')" id="defaultOpen">Step 1: Personal
-          Information</a></li>
-        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'eCont')">Step 2: Emergency Contact</a></li>
-        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'mInfo')">Step 3: Medical Information</a>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'pInfo')" id="defaultOpen">Krok 1: Informacje osobiste</a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'eCont')">Krok 2: Kontak w nagłych wypadkach</a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'mInfo')">Krok 3: Informacje medyczne</a>
         </li>
-        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'aInfo')">Step 4: Account Information</a>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'aInfo')">Krok 4: Informacje o koncie</a>
         </li>
       </ul>
 
       <div id="pInfo" class="tabcontent">
-        Enter your first name:
+        Wpisz Imię:
         <input type="text" name="firstName" style="display: block" placeholder="Ex.) First Name"/>
-        Enter your last name:
+        Wpisz Nazwisko:
         <input type="text" name="lastName" style="display: block" placeholder="Ex.) Last Name"/>
-        Enter your address:
+        Wpisz Adres:
         <input type="text" name="address" style="display: block" placeholder="Ex.) 123 Name Street"/>
-        Enter your phone number:
+        Wpisz nr telefonu:
         <input type="text" name="number" style="display: block" placeholder="Ex.) (123)456-7890"/>
-        Enter your email address:
+        Wpisz adres email:
         <input type="text" name="email" style="display: block" placeholder="Ex.) example@email.com"/>
-        Enter your insurance provider:
+        Wpisz nazwę ubezpieczyciela:
         <input type="text" name="provider" style="display: block" placeholder="Ex.) Excellus Blue Cross Blue Shield"/>
-        Enter your insurance ID number:
+        Wpisz ID ubezpieczenia:
         <input type="text" name="insuranceid" style="display: block" placeholder="Ex.) ABC012345678"/>
       </div>
 
       <div id="eCont" class="tabcontent">
-        Enter the first name of your contact:
+        Wpisz Imię Twojego kontaktu:
         <input type="text" name="contactfname" placeholder="Ex.) Jane"/>
-        Enter the last name of your contact:
+        Wpisz Nazwisko Twojego kontaktu:
         <input type="text" name="contactlname" placeholder="Ex.) Doe"/>
-        Enter the address of your contact:
+        Wpisz adres Twojego kontaktu:
         <input type="text" name="contactaddress" placeholder="Ex.) 123 Name Street"/>
-        Enter the phone number of your contact:
+        Wpisz nr telefonu Twojego kontatku:
         <input type="text" name="contactnumber" placeholder="Ex.) (123)456-7890"/>
       </div>
 
       <div id="mInfo" class="tabcontent">
-        Enter your height (0'00" or 0'0"):
+        Wpisz wzrost (0'00" lub 0'0"):
         <input type="text" name="height" style="display: block" placeholder="Ex.) 0'00"/>
-        Enter your weight (000.00 or 00.00):
+        Wpisz wagę (000.00 lub 00.00):
         <input style="display: block" type="text" name="weight" placeholder="Ex.) 000.00 or 00.00"/>
-        Enter any allergies you have:
+        Wpisz alergie:
         <input type="text" name="allergies" style="display: block" placeholder="Enter allergies here"/>
-        Select your gender:
+        Wybierz płeć:
         <select style="display: block" name='gender'>
-          <option name="placeholder" value="Please Select a Gender" selected disabled hidden>Please Select a Gender
-          </option>
-          <option name="gender1" value="Male">Male</option>
-          <option name="gender2" value="Female">Female</option>
-          <option name="gender3" value="Other">Other</option>
+          <option name="placeholder" value="Please Select a Gender" selected disabled hidden>Wybierz płeć</option>
+          <option name="gender1" value="Male">Mężczyzna</option>
+          <option name="gender2" value="Female">Kobieta</option>
+          <option name="gender3" value="Other">Inna</option>
         </select>
       </div>
 
       <div id="aInfo" class="tabcontent">
-        Enter a username:
+        Wpisz nazwę użytkownika:
         <input type="text" name="username" style="display: block" placeholder="Username"/>
-        Create a password:
+        Utwórz hasło:
         <input type="password" name="password" style="display: block" placeholder="Ex.) abcABC123!@#"/>
-        Confirm the password:
+        Potwierdź hasło:
         <input type="password" name="match" style="display: block" placeholder="Confirm Password"/>
       </div>
 
@@ -268,7 +266,7 @@
     </form>
 
     <form action="{% url 'appointments_app:index' %}">
-      <input class="button" type="submit" value="Cancel"/>
+      <input class="button" type="submit" value="Anuluj"/>
     </form>
 
     <script>

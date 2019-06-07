@@ -1,0 +1,54 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}REPLY MESSAGE{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-xl-8">
+        <h3>Odpowiedz na wiadomość</h3>
+        <form name='replyMessage' action="{% url 'appointments_app:createMessagesInfo'  message.id %}" method="post"
+              onsubmit="return checkform();">
+          {% csrf_token %}
+
+          <ul>
+            <li class="form">Ta odpowiedź skierowana jest do: <span
+                style="text-decoration: underline;">{{ message.senderName }}</span></li>
+          </ul>
+
+          <div class="form-group">
+            <label class="form-label pl-2 pr-2" for="subject">Temat:</label>
+            <input class="form-control" type="text" value="{{ message.subjectLine }}" name="subject" id="subject"/>
+            <label class="form-label pl-2 pr-2" for="message">Odpowiedź na wiadomość:</label>
+            <textarea class="form-control" rows="10" cols="101" name="message" id="message"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success btn-block mt-3" value="Send">Wyślij</button>
+        </form>
+
+        <form action="{% url 'appointments_app:messages' %}">
+          <button type="submit" class="btn btn-warning btn-block mt-1" value="Cancel">Anuluj</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    const checkform = () => {
+      if (document.replyMessage.subject.value.length === 0) {
+        alert("Please enter a subject for your message");
+        return false;
+      } else if (document.replyMessage.message.value.length === 0) {
+        alert("Please enter the contents of your message");
+        return false;
+      } else {
+        alert("Your message will now be sent")
+        return true;
+      }
+    }
+  </script>
+{% endblock javascripts %}

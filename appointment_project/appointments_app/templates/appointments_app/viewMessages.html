@@ -1,0 +1,37 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}VIEW MESSAGES{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-xl-8">
+        <div id="form-group">
+          <label for="title">Temat:</label>
+          <h4 id="title"> {{ message.subjectLine }}</h4>
+          <hr>
+          <label for="msg">Wiadomość:</label>
+          <p id="msg">{{ message.message }}</p>
+          <hr>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <form action="{% url 'appointments_app:messages' %}">
+              <button type="submit" class="btn btn-info mr-2" value="Back">Wróć</button>
+            </form>
+            <form action="{% url 'appointments_app:deleteMessages' message.id %}">
+              <button type="submit" class="btn btn-danger mr-2" value="Delete">Usuń</button>
+            </form>
+            <form action="{% url 'appointments_app:replyMessages' message.id %} %}">
+              <button type="submit" class="btn btn-primary" value="Reply">Odpowiedz</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}

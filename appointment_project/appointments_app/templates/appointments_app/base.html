@@ -44,64 +44,64 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           {% if type == "Administrator" %}
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:log' %}">Activity Log
+              <a class="nav-link d-flex" href="{% url 'appointments_app:log' %}">Log Aktywności
                 <i class="material-icons px-2">
                   trending_up
                 </i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:statistics' %}">Statistics
+              <a class="nav-link d-flex" href="{% url 'appointments_app:statistics' %}">Statystyki
                 <i class="material-icons px-2">
                   bar_chart
                 </i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:registerDoctorNurse' %}">Staff Registration
+              <a class="nav-link d-flex" href="{% url 'appointments_app:registerDoctorNurse' %}">Rejestracja Pracowników
                 <i class="material-icons px-2">
                   how_to_reg
                 </i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:messages' %}">Messages
+              <a class="nav-link d-flex" href="{% url 'appointments_app:messages' %}">Wiadomości
                 <i class="material-icons px-2">
                   mail
                 </i>
               </a>
             </li>
-          {% else %}
+          {% elif type == "Doctor" or type == "Nurse" or type == "Patient" %}
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:information' %}">User Information
+              <a class="nav-link d-flex" href="{% url 'appointments_app:information' %}">Informacje
                 <i class="material-icons px-2">
-                  info
-                </i>
+                info
+              </i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:appointments' %}">Manage Appointments
+              <a class="nav-link d-flex" href="{% url 'appointments_app:appointments' %}">Zarządzaj wizytami
                 <i class="material-icons px-2">
                   assignment_ind
                 </i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:prescriptions' %}">Prescriptions
+              <a class="nav-link d-flex" href="{% url 'appointments_app:prescriptions' %}">Recepty
                 <i class="material-icons px-2">
                   assignment
                 </i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:calendar' %}">Calendar
+              <a class="nav-link d-flex" href="{% url 'appointments_app:calendar' %}">Kalendarz
                 <i class="material-icons px-2">
                   calendar_today
                 </i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex" href="{% url 'appointments_app:messages' %}">Messages
+              <a class="nav-link d-flex" href="{% url 'appointments_app:messages' %}">Wiadomości
                 <i class="material-icons px-2">
                   mail
                 </i>
@@ -109,7 +109,7 @@
             </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link d-flex" href="{% url 'appointments_app:logout' %}">Log Out
+            <a class="nav-link d-flex" href="{% url 'appointments_app:logout' %}">Wyloguj
               <i class="material-icons px-2">
                 power_settings_new
               </i>

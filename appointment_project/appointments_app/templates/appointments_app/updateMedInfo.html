@@ -9,41 +9,39 @@
   <div class="container">
     <div class="row justify-content-md-center mt-5">
       <div class="col-12">
-        <h3>Update Patient Medical Information</h3>
+        <h3>Aktualizuj informacje medyczne Pacjenta</h3>
         <form name='update' action="{% url 'appointments_app:updateMedInfo' patient.id %}" method="post"
               onsubmit="return checkform();">
           {% csrf_token %}
 
           <ul>
-            <li>To update medical information, complete the form below</li>
+            <li>Aby zaktualizować informacje medyczne, wypełnij poniższy formularz.</li>
           </ul>
 
           <div class="form-group">
-            Enter patient's height (0'00" or 0'0"):
+            Wzrost (0'00" lub 0'0"):
             <input class="form-control" type="text" value="{{ patient.height }}" name="height" placeholder="Ex.) 0'00"/>
-            Enter patient's weight (000.00 or 00.00):
+            Waga (000.00 lub 00.00):
             <input class="form-control" type="text" value="{{ patient.weight }}" name="weight"
                    placeholder="Ex.) 000.00 or 00.00"/>
-            Enter any allergies the patient has:
+            Alergie:
             <input class="form-control" type="text" value="{{ patient.allergies }}" name="allergies"
                    placeholder="Ex.) Tree Nut, Asthma, Cats, etc."/>
-            Select patient's gender:
+            Płeć:
             <select class="form-control" name='gender'>
               {% if patient.gender == "" %}
-                <option name="placeholder" value="Please Select a Gender" selected disabled hidden>Please Select a
-                  Gender
-                </option>
-                <option name="gender1" value="Male">Male</option>
-                <option name="gender2" value="Female">Female</option>
-                <option name="gender3" value="Other">Other</option>
+                <option name="placeholder" value="Please Select a Gender" selected disabled hidden>Wybierz płeć</option>
+                <option name="gender1" value="Male">Mężczyzna</option>
+                <option name="gender2" value="Female">Kobieta</option>
+                <option name="gender3" value="Other">Inna</option>
               {% elif patient.gender == "Male" %}
-                <option name="gender1" value="Male" selected>Male</option>
-                <option name="gender2" value="Female">Female</option>
-                <option name="gender3" value="Other">Other</option>
+                <option name="gender1" value="Male" selected>Mężczyzna</option>
+                <option name="gender2" value="Female">Kobieta</option>
+                <option name="gender3" value="Other">Inna</option>
               {% elif patient.gender == "Female" %}
-                <option name="gender1" value="Male">Male</option>
-                <option name="gender2" value="Female" selected>Female</option>
-                <option name="gender3" value="Other">Other</option>
+                <option name="gender1" value="Male">Mężczyzna</option>
+                <option name="gender2" value="Female" selected>Kobieta</option>
+                <option name="gender3" value="Other">Inna</option>
               {% else %}
                 <option name="gender1" value="Male">Male</option>
                 <option name="gender2" value="Female">Female</option>
@@ -51,11 +49,11 @@
               {% endif %}
             </select>
           </div>
-          <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
+          <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Zapisz</button>
         </form>
 
         <form action="{% url 'appointments_app:information' %}">
-          <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+          <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Anuluj</button>
         </form>
       </div>
     </div>
@@ -87,17 +85,17 @@
     }
 
     function validateHeight(height) {
-      var re = /^\d'(\d{1,2}")?$/;
+      const re = /^\d'(\d{1,2}")?$/;
       return re.test(height);
     }
 
     function validateWeight(weight) {
-      var re = /^([1-9]\d|[1-9]\d\d)(\.\d\d)$/;
+      const re = /^([1-9]\d|[1-9]\d\d)(\.\d\d)$/;
       return re.test(weight);
     }
 
     function validateAllergies(allergies) {
-      var re = /^([a-zA-Z]+)|([a-zA-Z]+,[ ]*[a-zA-Z]*)|([a-zA-Z]*[ ][a-zA-Z]*)$/;
+      const re = /^([a-zA-Z]+)|([a-zA-Z]+,[ ]*[a-zA-Z]*)|([a-zA-Z]*[ ][a-zA-Z]*)$/;
       return re.test(allergies);
     }
   </script>

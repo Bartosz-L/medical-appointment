@@ -10,34 +10,32 @@
     <div class="row mt-5 mb-5 justify-content-md-center">
       <div class="col-10">
         {% if type == "Patient" %}
-          <h3><span style="text-decoration: underline;">{{ patient.firstName }} {{ patient.lastName }}</span>, these are
-            the prescriptions that have been assigned to you</h3>
+          <h3><span style="text-decoration: underline;">{{ patient.firstName }} {{ patient.lastName }}</span>, oto
+            recepty przypisane dla Ciebie</h3>
         {% elif type == "Doctor" %}
-          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, these
-            are
-            the prescriptions that you have created</h3>
+          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, oto
+            recepty, które stworzyłeś</h3>
         {% else %}
-          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, these
-            are
-            the prescriptions for patients at <span
+          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, oto
+            recepty dla pacjentów w placówce <span
                 style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
         {% endif %}
         {% if prescriptions %}
           <table class="table">
             <thead class="thead-dark">
             <tr>
-              <th>Name</th>
-              <th>Dosage</th>
+              <th>Imię</th>
+              <th>Dawka</th>
               {% if type == "Patient" %}
 
               {% else %}
-                <th>Patient</th>
+                <th>Pacjent</th>
               {% endif %}
 
               {% if type == "Doctor" %}
                 <th></th>
               {% else %}
-                <th>Doctor</th>
+                <th>Doktor</th>
               {% endif %}
             </tr>
             </thead>
@@ -61,7 +59,7 @@
                 {% if type == "Doctor" %}
                   <td>
                     <form action="{% url 'appointments_app:removePrescriptions' p.id %}">
-                      <button type="submit" class="btn btn-warning m-1" value="Remove">Remove</button>
+                      <button type="submit" class="btn btn-warning m-1" value="Remove">Usuń</button>
                     </form>
                   </td>
                 {% else %}
@@ -72,19 +70,19 @@
             </tbody>
           </table>
         {% else %}
-          <p>There are no prescriptions to view</p>
+          <p>Brak recept do wyświetlenia</p>
         {% endif %}
 
         {% if type == "Doctor" %}
-          <h3>These are the prescriptions for patients at <span
+          <h3>Recepty dla pacjentów w lokalizacj <span
               style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
           {% if presatw %}
             <table class="table">
               <thead class="thead-dark">
               <tr>
-                <th>Name</th>
-                <th>Dosage</th>
-                <th>Patient</th>
+                <th>Imię</th>
+                <th>Dawka</th>
+                <th>Pacjent</th>
                 <th></th>
               </tr>
               </thead>
@@ -96,7 +94,7 @@
                   <td>{{ p.patient }}</td>
                   <td>
                     <form action="{% url 'appointments_app:removePrescriptions' p.id %}">
-                      <button type="submit" class="btn btn-warning m-1" value="Remove">Remove</button>
+                      <button type="submit" class="btn btn-warning m-1" value="Remove">Usuń</button>
                     </form>
                   </td>
                 </tr>
@@ -104,12 +102,11 @@
               </tbody>
             </table>
           {% else %}
-            <p>There are no prescriptions to view</p>
+            <p>Brak recept do wyświetlenia</p>
           {% endif %}
 
           <form action="{% url 'appointments_app:createPrescriptions' %}">
-            <button type="submit" class="btn btn-primary btn-block m-1" value="Create Prescription">Create Prescription
-            </button>
+            <button type="submit" class="btn btn-primary btn-block m-1" value="Create Prescription">Utwórz receptę</button>
           </form>
         {% endif %}
       </div>

@@ -21,32 +21,30 @@
         onsubmit="return checkform();">
     {% csrf_token %}
     <ul>
-      <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'pInfo')" id="defaultOpen">Personal
-        Information</a></li>
-      <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'aInfo')">Account Information</a></li>
+      <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'pInfo')" id="defaultOpen">Dane osobiste</a></li>
+      <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'aInfo')">Informacje o koncie</a></li>
     </ul>
 
     <div id="pInfo" class="tabcontent">
-      Enter a first name:
+      Imię:
       <input type="text" name="firstName" placeholder="First Name"/>
-      Enter a last name:
+      Nazwisko:
       <input type="text" name="lastName" placeholder="Last Name"/>
-      Select a user type:
+      Wybierz typ użytkownika:
       <select style="display: block" name='type'>
-        <option name="type1" value="Please Select a User Type" selected disabled hidden>Please Select a User Type
-        </option>
-        <option name="type2" value="Doctor">Doctor</option>
-        <option name="type3" value="Nurse">Nurse</option>
+        <option name="type1" value="Please Select a User Type" selected disabled hidden>Proszę wybrać typ użytkownika</option>
+        <option name="type2" value="Doctor">Doktor</option>
+        <option name="type3" value="Nurse">Pielęgniarka</option>
         <option name="type4" value="Administrator">Administrator</option>
       </select>
     </div>
 
     <div id="aInfo" class="tabcontent">
-      Enter a username:
+      Nazwa użytkownika:
       <input type="text" name="username" placeholder="Username"/>
-      Create a password:
+      Utwórz hasło:
       <input type="password" name="password" placeholder="Ex.) abcABC123!@#"/>
-      Confirm the password:
+      Potwierdź hasło:
       <input type="password" name="match" placeholder="Confirm Password"/>
     </div>
 

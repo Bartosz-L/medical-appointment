@@ -11,8 +11,8 @@
       <div class="col-10">
 
 
-        <h1>Update your profile</h1>
-        <h3>To update your profile, complete the form below</h3>
+        <h3>Aktualizuj swój profil</h3>
+        <h4>Aby zaktualizować, wypełnij poniższy formularz.</h4>
         <form name='update' action="{% url 'appointments_app:updateProfileInfo' %}" method="post"
               onsubmit="return checkform();">
           {% csrf_token %}
@@ -21,62 +21,62 @@
           <ul class="nav nav-tabs nav-fill mt-5" id="myTab" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                 aria-selected="true">Personal Information</a>
+                 aria-selected="true">Dane osobiste</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                 aria-selected="false">Emergency Contact</a>
+                 aria-selected="false">Kontakt w razie wypadku</a>
             </li>
 
           </ul>
           <div class="tab-content mt-4" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <div id="pInfo" class="form-group tabcontent">
-                Enter your first name:
+                Wpisz Imię:
                 <input class="form-control" type="text" value="{{ patient.firstName }}" name="firstName"
                        placeholder="Ex.) First Name"/>
-                Enter your last name:
+                Wpisz Nazwisko:
                 <input class="form-control" type="text" value="{{ patient.lastName }}" name="lastName"
                        placeholder="Ex.) Last Name"/>
-                Enter your address:
+                Wpisz adres:
                 <input class="form-control" type="text" value="{{ patient.address }}" name="address"
                        placeholder="Ex.) 123 Name Street"/>
-                Enter your phone number:
+                Wpisz nr telefonu:
                 <input class="form-control" type="text" value="{{ patient.number }}" name="number"
                        placeholder="Ex.) (123)456-7890"/>
-                Enter your email address:
+                Wpisz adres email:
                 <input class="form-control" type="text" value="{{ patient.email }}" name="email"
                        placeholder="Ex.) example@email.com"/>
-                Enter your insurance provider:
+                Wpisz nazwę ubezpieczyciela:
                 <input class="form-control" type="text" value="{{ patient.provider }}" name="provider"
                        placeholder="Ex.) Excellus Blue Cross Blue Shield"/>
-                Enter your insurance ID number:
+                Wpisz ID ubezpieczenia:
                 <input class="form-control" type="text" value="{{ patient.insuranceid }}" name="insuranceid"
                        placeholder="Ex.) ABC012345678"/>
               </div>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <div id="eCont" class="form-group tabcontent">
-                Enter the first name of your contact:
+                Wpisz imię Twojego kontaktu:
                 <input class="form-control" type="text" value="{{ patient.contact.firstName }}" name="contactfname"
                        placeholder="Ex.) Jane"/>
-                Enter the last name of your contact:
+                Wpisz nazwisko Twojego kontaktu:
                 <input class="form-control" type="text" value="{{ patient.contact.lastName }}" name="contactlname"
                        placeholder="Ex.) Doe"/>
-                Enter the address of your contact:
+                Wpisz adres Twojego kontaktu:
                 <input class="form-control" type="text" value="{{ patient.contact.address }}" name="contactaddress"
                        placeholder="Ex.) 123 Name Street"/>
-                Enter the phone number of your contact:
+                Wpisz nr telefonu Twojego kontaktu:
                 <input class="form-control" type="text" value="{{ patient.contact.number }}" name="contactnumber"
                        placeholder="Ex.) (123)456-7890"/>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Save</button>
+          <button type="submit" class="btn btn-primary btn-block m-1 mt-5" value="Save">Zapisz</button>
         </form>
 
         <form action="{% url 'appointments_app:information' %}">
-          <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Cancel</button>
+          <button type="submit" class="btn btn-warning btn-block m-1" value="Cancel">Anuluj</button>
         </form>
 
       </div>
@@ -145,22 +145,22 @@
     }
 
     function validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     }
 
     function validatePhone(phone) {
-      var re = /^(\([0-9]{3}\))[0-9]{3}-[0-9]{4}$/;
+      const re = /^(\([0-9]{3}\))[0-9]{3}-[0-9]{4}$/;
       return re.test(phone);
     }
 
     function validateText(text) {
-      var re = /^[a-zA-Z\s]+$/;
+      const re = /^[a-zA-Z\s]+$/;
       return re.test(text);
     }
 
     function validateID(id) {
-      var re = /^([A-Z]{3})([0-9]{9})$/;
+      const re = /^([A-Z]{3})([0-9]{9})$/;
       return re.test(id);
     }
   </script>

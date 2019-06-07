@@ -1,0 +1,63 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}CREATE MESSAGE{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-xl-8">
+        <h3>Utwórz wiadomość</h3>
+        <form name='createMessage' action="{% url 'appointments_app:createMessagesInfo' -1 %}" method="post"
+              onsubmit="return checkform();">
+          {% csrf_token %}
+
+          <ul>
+            <li class="form">Aby wysłać wiadomość, wypełnij poniższy formularz.</li>
+          </ul>
+
+          <div class="form-group">
+            <label class="form-label pl-2 pr-2" for="users">Wybierz odbiorcę Twojej wiadomości:</label>
+            <select class="form-control" name='users' id="users">
+              <option name="placeholder" value="Please Select a User" selected disabled hidden>Wybierz odbiorcę</option>
+              {% for l in logins %}
+                <option name="users" value="{{ l.id }}">{{ l.username }}</option>
+              {% endfor %}
+            </select>
+            <label class="form-label pl-2 pr-2" for="subject">Temat:</label>
+            <input class="form-control" type="text" name="subject" id="subject"/>
+            <label class="form-label pl-2 pr-2" for="message">Treść wiadomości:</label>
+            <textarea class="form-control" rows="10" cols="101" name="message" id="message"></textarea>
+          </div>
+          <button class="btn btn-success btn-lg btn-block mt-3 mb-3" type="submit" value="Save">Wyślij</button>
+        </form>
+
+        <form action="{% url 'appointments_app:messages' %}">
+          <button class="btn btn-warning btn-lg btn-block mt-3 mb-3" type="submit" value="Cancel">Anuluj</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    const checkform = () => {
+      if (document.createMessage.subject.value.length === 0) {
+        alert("Please enter a subject for your message");
+        return false;
+      } else if (document.createMessage.message.value.length === 0) {
+        alert("Please enter the contents of your message");
+        return false;
+      } else if (document.createMessage.users.value === "Please Select a User") {
+        alert("Please select a recipient of your message")
+        return false;
+      } else {
+        alert("Your message will now be sent")
+        return true;
+      }
+    }
+  </script>
+{% endblock javascripts %}

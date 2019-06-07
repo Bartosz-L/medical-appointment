@@ -13,16 +13,16 @@
     <div class="row mt-5 mb-5 justify-content-md-center">
       <div class="col-xl-10">
         {% if type == "Patient" %}
-          <h3>Profile Information</h3>
+          <h3>Informacje o profilu</h3>
           <table class="table">
             <thead class="thead-dark">
             <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
+              <th>Imię</th>
+              <th>Adres</th>
+              <th>Telefon</th>
               <th>Email</th>
-              <th>Insurance Provider</th>
-              <th>Insurance ID</th>
+              <th>Ubezpieczyciel</th>
+              <th>ID ubezpieczenia</th>
             </tr>
             </thead>
             <tbody>
@@ -37,13 +37,13 @@
             </tbody>
           </table>
 
-          <h3>Emergency Contact</h3>
+          <h3>Kontak w nagłych wypadkach</h3>
           <table class="table">
             <thead class="thead-dark">
             <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
+              <th>Imię</th>
+              <th>Adres</th>
+              <th>Telefon</th>
             </tr>
             </thead>
             <tbody>
@@ -57,21 +57,19 @@
 
 
           <form action="{% url 'appointments_app:updateProfile' %}">
-            <button type="submit" class="btn btn-primary btn-lg btn-block" value="Update Profile Information">Update
-              Profile Information
-            </button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" value="Update Profile Information">Zaktualizuj profil</button>
           </form>
 
           <hr>
 
-          <h3>Medical Information</h3>
+          <h3>Informacje medyczne</h3>
           <table class="table">
             <thead class="thead-dark">
             <tr>
-              <th>Height</th>
-              <th>Weight</th>
-              <th>Allergies</th>
-              <th>Gender</th>
+              <th>Wzrost</th>
+              <th>Waga</th>
+              <th>Alergie</th>
+              <th>Płeć</th>
             </tr>
             </thead>
             <tbody>
@@ -87,13 +85,13 @@
 
           <hr>
 
-          <h3>Test Results</h3>
+          <h3>Wyniki badań</h3>
           {% if tests %}
             <table class="table">
               <thead class="thead-dark">
               <tr>
-                <th>Test Name</th>
-                <th>Release Status</th>
+                <th>Nazwa badania</th>
+                <th>Status</th>
               </tr>
               </thead>
               <tbody>
@@ -105,9 +103,9 @@
                     <td>{{ t.name }}</td>
                   {% endif %}
                   {% if t.released == True %}
-                    <td>Test is Released</td>
+                    <td>Badanie wydano</td>
                   {% else %}
-                    <td>Not yet Released</td>
+                    <td>Badanie niewydane</td>
                   {% endif %}
                 </tr>
               {% endfor %}
@@ -120,24 +118,22 @@
 
           <form action="{% url 'appointments_app:export' %}" onsubmit="return conExport();">
             <button type="submit" class="btn btn-primary btn-lg btn-block" value="Export Tests and Profile Information">
-              Export Tests and Profile Information
+              Eksport wyników badań
             </button>
           </form>
         {% endif %}
 
         {% if type != "Patient" %}
-          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, these
-            are
-            the patients at <span style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
+          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, oto pacjenci w lokalizacji <span style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
           {% if patw %}
             <table class="table">
               <thead class="thead-dark">
               <tr>
-                <th>Patient Name</th>
-                <th>Height</th>
-                <th>Weight</th>
-                <th>Allergies</th>
-                <th>Gender</th>
+                <th>Pacjent</th>
+                <th>Wzrost</th>
+                <th>Waga</th>
+                <th>Allergie</th>
+                <th>Płeć</th>
                 {% if type == "Doctor" %}
                   <th></th>
                   <th></th>
@@ -159,14 +155,14 @@
                       <td>
                         <form action="{% url 'appointments_app:tests' patient.id %}">
                           <button type="submit" class="btn btn-primary btn-lg btn-block"
-                                  value="Test Results">Test Results
+                                  value="Test Results">Wyniki badań
                           </button>
                         </form>
                       </td>
                       <td>
                         <form action="{% url 'appointments_app:discharge' patient.id %}">
                           <button type="submit" class="btn btn-warning btn-lg btn-block"
-                                  value="Discharge">Discharge
+                                  value="Discharge">Wyrejestruj
                           </button>
                         </form>
                       </td>
@@ -177,18 +173,18 @@
               </tbody>
             </table>
           {% else %}
-            <p>There are no patients at your hospital</p>
+            <p>Nie ma pacjentów w Twojej placówce</p>
           {% endif %}
 
           <br>
           <br>
 
-          <h3>Non Admitted Patients</h3>
+          <h3>Brak umówionych pacjentów</h3>
           <table class="table">
             <thead class="thead-dark">
             <tr>
-              <th>Patient Name</th>
-              <th>Current Hospital</th>
+              <th>Pacjent</th>
+              <th>Wybrany szpital</th>
               <th></th>
             </tr>
             </thead>

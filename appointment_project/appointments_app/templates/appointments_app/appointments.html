@@ -16,15 +16,14 @@
         {% endif %}
 
         {% if type == "Patient" %}
-          <h3><span style="text-decoration: underline;">{{ user.firstName }} {{ user.lastName }}</span>, These Are Your
-            Appointments</h3>
+          <h3><span style="text-decoration: underline;">{{ user.firstName }} {{ user.lastName }}</span>, tu znajdują się Twoje wizyty</h3>
           {% if appointments %}
             <table class="table">
               <thead class="thead-dark">
               <tr>
-                <th>Date And Time</th>
-                <th>Doctor</th>
-                <th>Location</th>
+                <th>Data i czas</th>
+                <th>Doktor</th>
+                <th>Lokalizacja</th>
                 <th></th>
               </tr>
               </thead>
@@ -39,7 +38,7 @@
                   <td>{{ appointment.location }}</td>
                   <td>
                     <form action="{% url 'appointments_app:cancelAppointment' appointment.id %}">
-                      <button type="submit" class="btn btn-warning" value="Cancel">Cancel</button>
+                      <button type="submit" class="btn btn-warning" value="Cancel">Anuluj</button>
                     </form>
                   </td>
                 </tr>
@@ -47,25 +46,23 @@
               </tbody>
             </table>
           {% else %}
-            <p>You have no scheduled appointments.</p>
+            <p>Nie masz żadnych zaplanowanych wizyt.</p>
           {% endif %}
 
           <form action="{% url 'appointments_app:createAppointment' %}">
-            <button type="submit" class="btn btn-primary btn-block btn-lg" value="Create Appointment">Create
-              Appointment
-            </button>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" value="Create Appointment">Utwórz wizytę</button>
           </form>
         {% endif %}
 
         {% if type == "Doctor" %}
-          <h3>Appointments at <span style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
+          <h3>Wizyty w lokalizacji <span style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
           {% if appointments %}
             <table class="table">
               <thead class="thead-dark">
               <tr>
-                <th>Date And Time</th>
-                <th>Patient</th>
-                <th>Doctor</th>
+                <th>Data i czas</th>
+                <th>Pacjent</th>
+                <th>Doktor</th>
               </tr>
               </thead>
               <tbody>
@@ -82,10 +79,10 @@
               </tbody>
             </table>
           {% else %}
-            <p>At the moment, there are no appointments at your workplace.</p>
+            <p>Nie ma żadnych wizyt w Twojej lokalizacji na ten moment.</p>
           {% endif %}
           <hr/>
-          <h3>Appointments scheduled with you,
+          <h3>Wizyty zaplanowane z Tobą,
             <span
                 style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}
             </span>
@@ -94,9 +91,9 @@
             <table class="table">
               <thead class="thead-dark">
               <tr>
-                <th>Date And Time</th>
-                <th>Patient</th>
-                <th>Location</th>
+                <th>Data i czas</th>
+                <th>Pacjent</th>
+                <th>Lokalizacja</th>
                 <th></th>
               </tr>
               </thead>
@@ -111,7 +108,7 @@
                   <td>{{ appointment.location }}</td>
                   <td>
                     <form action="{% url 'appointments_app:cancelAppointment' appointment.id %}">
-                      <button type="submit" class="btn btn-warning" value="Cancel">Cancel</button>
+                      <button type="submit" class="btn btn-warning" value="Cancel">Anuluj</button>
                     </form>
                   </td>
                 </tr>
@@ -119,29 +116,27 @@
               </tbody>
             </table>
           {% else %}
-            <p>You have no scheduled appointments.</p>
+            <p>Nie masz żadnych zaplanowanych wizyt.</p>
           {% endif %}
 
           <br>
 
           <form action="{% url 'appointments_app:createAppointment' %}">
-            <button type="submit" class="btn btn-primary btn-block btn-lg" value="Create Appointment">Create
-              Appointment
-            </button>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" value="Create Appointment">Utwórz wizytę</button>
           </form>
         {% endif %}
 
         {% if type == "Nurse" %}
           <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>,
-            these are the appointments at <span style="text-decoration: underline;">{{ employee.workplace.name }}</span>
+            To Twoje wizyty w lokalizacji <span style="text-decoration: underline;">{{ employee.workplace.name }}</span>
           </h3>
           {% if appointments %}
             <table class="table">
               <thead class="thead-dark">
               <tr>
-                <th>Date And Time</th>
-                <th>Patient</th>
-                <th>Doctor</th>
+                <th>Data i czas</th>
+                <th>Pacjent</th>
+                <th>Doktor</th>
               </tr>
               </thead>
               <tbody>
@@ -158,15 +153,13 @@
               </tbody>
             </table>
           {% else %}
-            <p>At the moment, there are no appointments at your workplace.</p>
+            <p>W chwili obecnej nie ma żadnej wizyty w Twoim miejscu pracy.</p>
           {% endif %}
 
           <br>
 
           <form action="{% url 'appointments_app:createAppointment' %}">
-            <button type="submit" class="btn btn-primary btn-block btn-lg" value="Create Appointment">Create
-              Appointment
-            </button>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" value="Create Appointment">Utwórz wizytę</button>
           </form>
         {% endif %}
       </div>

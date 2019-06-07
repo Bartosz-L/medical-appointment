@@ -1,0 +1,87 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}MESSAGES{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-xl-8">
+        <h2>Szkrzynka odbiorcza</h2>
+        {% if messages %}
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Nadawca</th>
+              <th>Typ nadawca</th>
+              <th>Data wysłania</th>
+              <th>Temat</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for m in messages %}
+              <tr>
+                <td>{{ m.senderName }}</td>
+                <td>{{ m.senderType }}</td>
+                <td>{{ m.date }}</td>
+                <td>{{ m.subjectLine }}</td>
+                <td>
+                  <form action="{% url 'appointments_app:viewMessages' m.id %}">
+                    <button type="submit" class="btn btn-info btn-sm" value="View">Otwórz</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>Brak wiadomości do wyświetlenia</p>
+        {% endif %}
+
+        <br>
+
+        <h2>Wysłane Wiadomości</h2>
+        {% if sendMessages %}
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Odbiorca</th>
+              <th>Data wysłania</th>
+              <th>Temat</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for m in sendMessages %}
+              <tr>
+                <td>{{ m.receiverName }}</td>
+                <td>{{ m.date }}</td>
+                <td>{{ m.subjectLine }}</td>
+                <td>
+                  <form action="{% url 'appointments_app:viewMessages' m.id %}">
+                    <button type="submit" class="btn btn-info btn-sm" value="View">Otwórz</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>Nie wysłałeś żadnych wiadomości</p>
+        {% endif %}
+
+        <br>
+
+        <form action="{% url 'appointments_app:createMessages' %}">
+          <button type="submit" class="btn btn-primary btn-block btn-lg" value="Create Message">Utwórz wiadomość</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}
