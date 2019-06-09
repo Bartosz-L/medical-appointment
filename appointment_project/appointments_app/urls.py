@@ -30,9 +30,11 @@ urlpatterns = [
     path('information/discharge/<int:pat_id>', views.discharge, name='discharge'),
     path('information/admission/<int:pat_id>/<int:emp_id>', views.admission, name='admission'),
     path('information/transfer/<int:pat_id>/<int:emp_id>', views.transfer, name='transfer'),
+    # info tests view
     path('information/tests/<int:pat_id>/', views.tests, name='tests'),
     path('information/tests/create-test/<int:pat_id>/', views.createTest, name='createTest'),
-    path('information/tests/create-test/create-test-info/<int:pat_id>/', views.createTestInfo, name='createTestInfo'),
+    re_path(r'^information/tests/create-test/create-test-info/(?P<pat_id>[0-9]+)/', views.createTestInfo,
+            name='createTestInfo'),
     path('information/tests/release-test/<int:test_id>/', views.releaseTest, name='releaseTest'),
     path('information/test-details/<int:test_id>/', views.testDetails, name='testDetails'),
     # appointments view

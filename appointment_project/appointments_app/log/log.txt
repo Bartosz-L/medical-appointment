@@ -94,3 +94,52 @@ patient deleted message #7 - logged on: 06/09/19 @ 14:27:13
 patient deleted message #6 - logged on: 06/09/19 @ 14:27:17
 patient deleted message #1 - logged on: 06/09/19 @ 14:27:22
 User patient logged out - logged on: 06/09/19 @ 14:27:41
+User doctor1 logged in - logged on 06/09/19 @ 14:40:44
+Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 15:11:16
+User patient logged in - logged on 06/09/19 @ 15:54:52
+User  logged out - logged on: 06/09/19 @ 15:57:00
+User patient logged in - logged on 06/09/19 @ 15:57:07
+User patient logged in - logged on 06/09/19 @ 16:29:53
+User  logged out - logged on: 06/09/19 @ 16:31:50
+User patient logged in - logged on 06/09/19 @ 16:32:02
+User  logged out - logged on: 06/09/19 @ 16:38:46
+User patient logged in - logged on 06/09/19 @ 16:38:54
+User patient logged in - logged on 06/09/19 @ 16:40:40
+Patient patient sent a message to doctor1 - logged on: 06/09/19 @ 16:41:02
+User  logged out - logged on: 06/09/19 @ 16:42:36
+User patient logged in - logged on 06/09/19 @ 16:42:42
+User patient logged out - logged on: 06/09/19 @ 16:42:58
+User admin1 logged in - logged on 06/09/19 @ 16:43:06
+User  logged out - logged on: 06/09/19 @ 16:46:28
+User admin1 logged in - logged on 06/09/19 @ 16:46:34
+User admin1 logged out - logged on: 06/09/19 @ 16:47:03
+User patient logged in - logged on 06/09/19 @ 16:48:35
+User patient logged out - logged on: 06/09/19 @ 16:49:20
+User doctor1 logged in - logged on 06/09/19 @ 16:49:33
+Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 16:50:07
+Patient patient's test results were released by Doctor doctor1 - logged on: 06/09/19 @ 17:01:04
+User doctor1 logged in - logged on 06/09/19 @ 17:04:24
+User  logged out - logged on: 06/09/19 @ 17:08:05
+User doctor1 logged in - logged on 06/09/19 @ 17:08:12
+Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 17:09:27
+User  logged out - logged on: 06/09/19 @ 17:13:22
+User doctor1 logged in - logged on 06/09/19 @ 17:13:33
+Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 17:13:57
+Patient patient's test results were released by Doctor doctor1 - logged on: 06/09/19 @ 17:14:00
+Patient patient's test results were released by Doctor doctor1 - logged on: 06/09/19 @ 17:30:24
+User doctor1 logged out - logged on: 06/09/19 @ 17:32:42
+User patient logged in - logged on 06/09/19 @ 17:32:51
+User patient logged out - logged on: 06/09/19 @ 17:33:09
+User doctor1 logged in - logged on 06/09/19 @ 17:33:25
+User doctor1 logged out - logged on: 06/09/19 @ 17:35:37
+User doctor1 logged in - logged on 06/09/19 @ 17:35:44
+User doctor1 logged out - logged on: 06/09/19 @ 17:39:12
+User patient logged in - logged on 06/09/19 @ 17:39:20
+User doctor1 logged in - logged on 06/09/19 @ 18:23:07
+User doctor1 logged out - logged on: 06/09/19 @ 18:31:25
+User admin1 logged in - logged on 06/09/19 @ 18:32:06
+User admin1 logged in - logged on 06/09/19 @ 18:36:31
+Administrator admin1 registered a new Administrator account - logged on: 06/09/19 @ 18:47:56
+User admin1 logged out - logged on: 06/09/19 @ 18:48:00
+User lizenga logged in - logged on 06/09/19 @ 18:48:07
+User lizenga logged out - logged on: 06/09/19 @ 18:49:41

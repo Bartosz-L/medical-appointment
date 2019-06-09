@@ -1,0 +1,60 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}TESTS{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-xl-8">
+        <h2>Tests</h2>
+        {% if test %}
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th>Nazwa</th>
+              <th>Status wydania</th>
+              <th>Wydaj</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for t in test %}
+              <tr>
+                {% if t.released == True %}
+                  <td><a class="alink" href="{% url 'appointments_app:testDetails' t.id %}">{{ t.name }}</a></td>
+                  <td class="text-success">WYDANO</td>
+                  <td>X</td>
+                {% else %}
+                  <td>{{ t.name }}</td>
+                  <td class="text-danger">NIE WYDANO</td>
+                  <td>
+                    <form action="{% url 'appointments_app:releaseTest' t.id %}">
+                      <button class="btn btn-primary btn-sm btn-block" type="submit" value="Release">Wydaj</button>
+                    </form>
+                  </td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+
+          </table>
+        {% else %}
+          <p>Obecnie brak badań dla tego pacjenta.</p>
+        {% endif %}
+
+        <form action="{% url 'appointments_app:createTest' patient.id %}">
+          {% csrf_token %}
+          <button class="btn btn-primary btn-block mt-5" type="submit" value="Create test">Utwórz Badanie</button>
+        </form>
+        <form action="{% url 'appointments_app:information' %}">
+          <button class="btn btn-info btn-block mt-1" type="submit" value="Return">Wróć</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}

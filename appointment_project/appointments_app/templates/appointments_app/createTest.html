@@ -1,0 +1,44 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}CREATE TEST{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-xl-8">
+        <div class="form-group">
+          <h3>Utwórz nowe badanie</h3>
+          <form name='create' action="{% url 'appointments_app:createTestInfo' patient.id %}" method="post"
+                enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+
+            <ul>
+              <li>Aby utworzyć badanie, wypełnij poniższy formularz.</li>
+            </ul>
+
+            <div class="formcontent">
+              <label class="form-label pr-2" for="name">Nazwa badania:</label>
+              <input id="name" class="form-control" type="text" name="name" placeholder="Ex.) Blood Pressure"/>
+              <label class="form-label pr-2" for="description">Opis badania:</label>
+              <input id="description" class="form-control" type="text" name="description"
+                     placeholder="np.) opis, uwagi, zalecenia"/>
+              <label class="form-label pr-2" for="name">Załącz plik:</label>
+              <input id="file" class="form-control" type="file" name="file"/>
+            </div>
+            <button class="btn btn-primary btn-block mt-5" type="submit" value="Submit">Zapisz</button>
+          </form>
+
+          <form action="{% url 'appointments_app:tests' patient.id %}">
+            <button class="btn btn-warning btn-block mt-2" type="submit" value="Cancel">Anuluj</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}

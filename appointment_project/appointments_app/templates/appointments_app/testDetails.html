@@ -1,0 +1,31 @@
+{% extends "appointments_app/base.html" %}
+{% block title %}TEST DETAILS{% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-xl-8">
+        <div class="form-group">
+          <h3>Wyniki badania: <span style="text-decoration: underline">{{ test.name }} </span></h3>
+          <h4>Udostępnione przez Doktora: <span
+              style="text-decoration: underline">{{ test.doctor.firstName }} {{ test.doctor.lastName }}</span></h4>
+          <h5>Opis badania: {{ test.description }} </h5>
+          {% if test.testResults != "" %}
+            <h4>Aby pobrać badanie, kliknij w poniższy przycisk</h4>
+            <h3><a class="btn btn-primary btn-block mt-3" href={{ test.testResults.url }} download>Pobierz</a></h3>
+          {% endif %}
+          <form action="{% url 'appointments_app:information' %}">
+            <button class="btn btn-info btn-block" type="submit">Wróć</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}

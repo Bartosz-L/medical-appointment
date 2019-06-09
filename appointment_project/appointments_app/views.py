@@ -21,6 +21,8 @@ from datetime import date
 import os
 import csv
 
+from .functions import getUserType
+
 # This variable is for storing the username entered when a user logs-in
 uname = ''
 
@@ -205,9 +207,11 @@ def home(request):
 
 # widok odpowiada za renderowanie html'a dla rejestracji doktora i pielegniarki
 def registerDoctorNurse(request):
+    global uname
+    type = getUserType(uname)
     workplaces = Hospital.objects.order_by('-name')
     admin = Administrator.objects.get(username=uname)
-    context = {'workplaces': workplaces, 'admin': admin}
+    context = {'workplaces': workplaces, 'admin': admin, 'type': type}
     return render(request, 'appointments_app/registerDoctorNurse.html', context)
 
 
@@ -296,15 +300,18 @@ def information(request):
         tests = Test.objects.filter(patient=p)
         context = {'patient': p,
                    'type': utype,
-                   'tests': tests}
+                   'tests': tests,
+                   }
         return render(request, 'appointments_app/information.html', context)
 
 
 # Widok odpowiada za renderowanie htmla do edycji Profilu.
 def updateProfile(request):
     global uname
+    type = getUserType(uname)
+
     patient = Patient.objects.get(username=uname)
-    context = {'patient': patient}
+    context = {'patient': patient, 'type': type}
     return render(request, 'appointments_app/updateProfile.html', context)
 
 
@@ -433,18 +440,24 @@ def transfer(request, pat_id, emp_id):
 
 # Widok renderuje HTML dla badań.
 def tests(request, pat_id):
+    global uname
+    type = getUserType(uname)
+
     p = Patient.objects.get(id=pat_id)
     t = Test.objects.filter(patient=p)
     context = {'patient': p,
-               'test': t}
+               'test': t,
+               'type': type
+               }
     return render(request, 'appointments_app/tests.html', context)
 
 
 # Widok renderuje HTML dla tworzenia na nowych badań
 def createTest(request, pat_id):
     global uname
+    type = getUserType(uname)
     patient = Patient.objects.get(id=pat_id)
-    context = {'patient': patient}
+    context = {'patient': patient, 'type': type}
     return render(request, 'appointments_app/createTest.html', context)
 
 
@@ -496,8 +509,9 @@ def releaseTest(request, test_id):
 # moduł wyświetlania zawartości badania dla pacjenta
 def testDetails(request, test_id):
     global uname
+    type = getUserType(uname)
     test = Test.objects.get(id=test_id)
-    context = {'test': test}
+    context = {'test': test, 'type': type}
     return render(request, 'appointments_app/testDetails.html', context)
 
 
@@ -953,6 +967,9 @@ def calendar(request):
 
 # This module simply renders the activity log for an administrator account
 def log(request):
+    global uname
+    type = getUserType(uname)
+
     filename = "log.txt"
     cwd = os.getcwd()
     target = open(cwd + "\\appointments_app\\log\\" + filename, 'r')
@@ -962,12 +979,15 @@ def log(request):
         logString.append(appString)
         appString = target.readline()
     target.close()
-    context = {'logString': logString}
+    context = {'logString': logString, 'type': type}
     return render(request, 'appointments_app/log.html', context)
 
 
 # This module simply renders the statistics page for an administrator account
 def statistics(request):
+    global uname
+    type = getUserType(uname)
+
     admins = Administrator.objects.count()
     doctors = Doctor.objects.count()
     nurses = Nurse.objects.count()
@@ -979,7 +999,9 @@ def statistics(request):
                'nurses': nurses,
                'patients': patients,
                'appointments': appts,
-               'prescriptions': pres}
+               'prescriptions': pres,
+               'type': type
+               }
     return render(request, 'appointments_app/statistics.html', context)
 
 
@@ -1022,17 +1044,23 @@ def messages(request):
 # This module simply renders the create message page for a user.
 def createMessages(request):
     global uname
+    type = getUserType(uname)
+
     logins = LogInInfo.objects.all()
-    context = {'logins': logins}
+    context = {'logins': logins, "type": type}
     return render(request, 'appointments_app/createMessages.html', context)
 
 
 # This module simply renders the reply message page for a user.
 def replyMessages(request, mess_id):
     global uname
+    type = getUserType(uname)
+
     logins = LogInInfo.objects.all()
     context = {'logins': logins,
-               'message': Message.objects.get(id=mess_id)}
+               'message': Message.objects.get(id=mess_id),
+               'type': type
+               }
     return render(request, 'appointments_app/replyMessages.html', context)
 
 
@@ -1094,8 +1122,10 @@ def createMessagesInfo(request, mess_id):
 # message.
 def viewMessages(request, mess_id):
     global uname
+    type = getUserType(uname)
+
     mess = Message.objects.get(id=mess_id)
-    context = {'message': mess}
+    context = {'message': mess, 'type': type}
     return render(request, 'appointments_app/viewMessages.html', context)
 
 

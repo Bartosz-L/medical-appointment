@@ -1,59 +1,80 @@
 {% extends "appointments_app/base.html" %}
+{% load static %}
 {% block title %}STAFF REGISTRATION{% endblock title %}
 
 {% block stylesheets %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'formPages.css' %}"/>
 {% endblock stylesheets %}
 
 {% block content %}
-  <div id="container">
-  <div id="formContainer">
-  <h1>Register Staff at {{ admin.workplace }}</h1>
+  <div class="container">
+    <div class="row mt-5 mb-5 justify-content-md-center">
+      <div class="col-12">
+        <div class="form-group">
+          <h3>Zarejestruj pracownika dla placówki: {{ admin.workplace }}</h3>
 
-  {% if error_message %}
-    <div id="alert">
-      <strong>{{ error_message }}</strong>
+          {% if error_message %}
+            <div id="alert">
+              <strong>{{ error_message }}</strong>
+            </div>
+          {% endif %}
+
+          <form name='registerDoctorNurse' action="{% url 'appointments_app:createDoctorNurseLogIn' %}" method="post"
+                onsubmit="return checkform();">
+            {% csrf_token %}
+
+            <ul class="nav nav-tabs nav-fill mt-5" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                   aria-selected="true">Dane osobiste</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                   aria-controls="profile"
+                   aria-selected="false">Kontakt w razie wypadku</a>
+              </li>
+            </ul>
+
+            <div class="tab-content mt-4" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div id="pInfo" class="form-group tabcontent">
+                  Imię:
+                  <input class="form-control" type="text" name="firstName" placeholder="First Name"/>
+                  Nazwisko:
+                  <input class="form-control" type="text" name="lastName" placeholder="Last Name"/>
+                  Wybierz typ użytkownika:
+                  <select class="form-control" name='type'>
+                    <option name="type1" value="Please Select a User Type" selected disabled hidden>Proszę wybrać typ
+                      użytkownika
+                    </option>
+                    <option name="type2" value="Doctor">Doktor</option>
+                    <option name="type3" value="Nurse">Pielęgniarka</option>
+                    <option name="type4" value="Administrator">Administrator</option>
+                  </select>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div id="aInfo" class="form-group tabcontent">
+                  Nazwa użytkownika:
+                  <input class="form-control" type="text" name="username" placeholder="Username"/>
+                  Utwórz hasło:
+                  <input class="form-control" type="password" name="password" placeholder="Ex.) abcABC123!@#"/>
+                  Potwierdź hasło:
+                  <input class="form-control" type="password" name="match" placeholder="Confirm Password"/>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block mt-5">Utwórz</button>
+          </form>
+
+          <form action="{% url 'appointments_app:home' %}">
+            <button type="submit" class="btn btn-warning btn-block mt-1">Anuluj</button>
+          </form>
+        </div>
+
+      </div>
     </div>
-  {% endif %}
-
-  <form name='registerDoctorNurse' action="{% url 'appointments_app:createDoctorNurseLogIn' %}" method="post"
-        onsubmit="return checkform();">
-    {% csrf_token %}
-    <ul>
-      <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'pInfo')" id="defaultOpen">Dane osobiste</a></li>
-      <li><a href="javascript:void(0)" class="tablinks" onclick="openInfo(event, 'aInfo')">Informacje o koncie</a></li>
-    </ul>
-
-    <div id="pInfo" class="tabcontent">
-      Imię:
-      <input type="text" name="firstName" placeholder="First Name"/>
-      Nazwisko:
-      <input type="text" name="lastName" placeholder="Last Name"/>
-      Wybierz typ użytkownika:
-      <select style="display: block" name='type'>
-        <option name="type1" value="Please Select a User Type" selected disabled hidden>Proszę wybrać typ użytkownika</option>
-        <option name="type2" value="Doctor">Doktor</option>
-        <option name="type3" value="Nurse">Pielęgniarka</option>
-        <option name="type4" value="Administrator">Administrator</option>
-      </select>
-    </div>
-
-    <div id="aInfo" class="tabcontent">
-      Nazwa użytkownika:
-      <input type="text" name="username" placeholder="Username"/>
-      Utwórz hasło:
-      <input type="password" name="password" placeholder="Ex.) abcABC123!@#"/>
-      Potwierdź hasło:
-      <input type="password" name="match" placeholder="Confirm Password"/>
-    </div>
-
-    <input type="submit" value="Submit"/>
-  </form>
-
-  <form action="{% url 'appointments_app:home' %}">
-    <input class="button" type="submit" value="Cancel"/>
-  </form>
+  </div>
 {% endblock content %}
 
 {% block javascripts %}
@@ -120,23 +141,5 @@
       let re = /^[a-zA-Z\s]+$/;
       return re.test(text);
     }
-  </script>
-  <script>
-    function openInfo(e, infoType) {
-      let i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(infoType).style.display = "block";
-      e.currentTarget.className += " active";
-    }
-  </script>
-  <script>
-    document.getElementById("defaultOpen").click()
   </script>
 {% endblock javascripts %}
