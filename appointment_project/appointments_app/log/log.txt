@@ -143,3 +143,5 @@ Administrator admin1 registered a new Administrator account - logged on: 06/09/1
 User admin1 logged out - logged on: 06/09/19 @ 18:48:00
 User lizenga logged in - logged on 06/09/19 @ 18:48:07
 User lizenga logged out - logged on: 06/09/19 @ 18:49:41
+User adminjohn logged in - logged on 06/09/19 @ 19:01:27
+User adminjohn logged out - logged on: 06/09/19 @ 19:01:37
