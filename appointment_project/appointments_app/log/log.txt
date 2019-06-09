@@ -78,3 +78,19 @@ Doctor doctor1 sent a message to patient - logged on: 06/07/19 @ 23:29:33
  deleted message #3 - logged on: 06/07/19 @ 23:33:55
 User patient logged in - logged on 06/07/19 @ 23:35:41
 Patient patient sent a message to doctor1 - logged on: 06/07/19 @ 23:36:16
+User doctor1 logged in - logged on 06/09/19 @ 14:00:38
+doctor1 deleted message #2 - logged on: 06/09/19 @ 14:11:26
+User patient logged in - logged on 06/09/19 @ 14:12:52
+Patient patient sent a message to doctor2 - logged on: 06/09/19 @ 14:13:16
+User patient logged in - logged on 06/09/19 @ 14:16:35
+User  logged out - logged on: 06/09/19 @ 14:17:47
+User patient logged in - logged on 06/09/19 @ 14:19:22
+User patient logged in - logged on 06/09/19 @ 14:22:02
+patient deleted message #4 - logged on: 06/09/19 @ 14:22:13
+User patient logged in - logged on 06/09/19 @ 14:26:37
+Patient patient sent a message to doctor1 - logged on: 06/09/19 @ 14:26:58
+patient deleted message #5 - logged on: 06/09/19 @ 14:27:09
+patient deleted message #7 - logged on: 06/09/19 @ 14:27:13
+patient deleted message #6 - logged on: 06/09/19 @ 14:27:17
+patient deleted message #1 - logged on: 06/09/19 @ 14:27:22
+User patient logged out - logged on: 06/09/19 @ 14:27:41

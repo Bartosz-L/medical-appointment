@@ -58,11 +58,11 @@ urlpatterns = [
     # messages view
     path('messages/', views.messages, name='messages'),
     path('messages/create-messages/', views.createMessages, name='createMessages'),
-    re_path(r'^messages/createMess/createMessInfo/(?P<mess_id>-1)/', views.createMessagesInfo,
+    re_path(r'^messages/create-messages/create-messages-info/(?P<mess_id>-1)/', views.createMessagesInfo,
             name="createMessagesInfo"),
-    path('messages/reply-messages/<int:mess_id>/', views.replyMessages, name='replyMessages'),
-    path('messages/reply-messages/create-messages-info/<int:mess_id>/', views.createMessagesInfo,
-         name="createMessagesInfo"),
+    re_path(r'^messages/reply-messages/(?P<mess_id>[0-9]+)/', views.replyMessages, name='replyMessages'),
+    re_path(r'^messages/reply-messages/create-messages-info/(?P<mess_id>[0-9]+)/', views.createMessagesInfo,
+            name="createMessagesInfo"),
     path('messages/view-messages/<int:mess_id>/', views.viewMessages, name='viewMessages'),
     path('messages/delete-messages/<int:mess_id>/', views.deleteMessages, name='deleteMessages'),
 ]
