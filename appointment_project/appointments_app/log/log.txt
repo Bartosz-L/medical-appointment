@@ -1,147 +1,31 @@
-User test registered a new account - logged on: 05/10/19 @ 12:46:39
-User john registered a new account - logged on: 06/04/19 @ 16:00:37
-User john logged in - logged on 06/04/19 @ 16:00:56
-User john logged in - logged on 06/04/19 @ 16:06:23
-User john logged out - logged on: 06/04/19 @ 16:19:59
-User john logged in - logged on 06/04/19 @ 16:20:44
-User john logged out - logged on: 06/04/19 @ 16:20:46
-User john logged in - logged on 06/05/19 @ 09:41:47
-User admin1 logged in - logged on 06/05/19 @ 11:20:01
-User admin1 logged out - logged on: 06/05/19 @ 11:20:38
-User patient logged in - logged on 06/05/19 @ 11:58:59
-User patient logged out - logged on: 06/05/19 @ 12:07:01
-User  logged out - logged on: 06/05/19 @ 12:07:19
-User patient logged in - logged on 06/05/19 @ 12:07:29
-User  logged out - logged on: 06/05/19 @ 12:52:17
-User patient logged in - logged on 06/05/19 @ 12:52:34
-User patient logged in - logged on 06/05/19 @ 13:00:16
-User patient logged out - logged on: 06/05/19 @ 13:32:44
-User patient logged in - logged on 06/05/19 @ 13:32:58
-User patient logged in - logged on 06/05/19 @ 14:20:51
-User  logged out - logged on: 06/05/19 @ 14:32:04
-User patient logged in - logged on 06/05/19 @ 14:32:10
-User  logged out - logged on: 06/05/19 @ 14:34:34
-User patient logged in - logged on 06/05/19 @ 14:34:41
-User patient logged out - logged on: 06/05/19 @ 15:49:29
-User doctor1 logged in - logged on 06/05/19 @ 15:50:16
-User doctor1 created an appointment at Hospital 1 on 12,01,2019 08:00 AM - logged on: 06/05/19 @ 15:51:38
-User doctor1 logged out - logged on: 06/05/19 @ 15:51:45
-User patient logged in - logged on 06/05/19 @ 15:51:55
-User admin1 logged in - logged on 06/06/19 @ 09:07:36
-User admin1 logged out - logged on: 06/06/19 @ 09:07:55
-User patient logged in - logged on 06/06/19 @ 09:08:03
-User patient logged out - logged on: 06/06/19 @ 09:15:46
-User doctor1 logged in - logged on 06/06/19 @ 09:16:18
-User doctor1 logged in - logged on 06/06/19 @ 09:58:04
-Doctor doctor1 created a prescription for Patient patient - logged on: 06/06/19 @ 10:04:05
-Doctor doctor1 updated Prescription #1 for Patient patient - logged on: 06/06/19 @ 10:26:03
-User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 10:52:26
-User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 10:52:36
-User doctor1 logged out - logged on: 06/06/19 @ 11:05:57
-User patient logged in - logged on 06/06/19 @ 11:06:06
-User  logged out - logged on: 06/06/19 @ 11:09:26
-User patient logged in - logged on 06/06/19 @ 11:09:33
-User patient updated their profile info - logged on: 06/06/19 @ 11:35:01
-User patient logged out - logged on: 06/06/19 @ 12:04:42
-User doctor1 logged in - logged on 06/06/19 @ 12:04:51
-User doctor1 updated Patient patient's medical information - logged on: 06/06/19 @ 12:05:40
-User doctor1 updated Patient patient's medical information - logged on: 06/06/19 @ 12:07:32
-User doctor1 updated Appointment #1 - logged on: 06/06/19 @ 12:14:13
-User doctor1 logged out - logged on: 06/06/19 @ 12:17:26
-User patient logged in - logged on 06/06/19 @ 12:17:33
-User patient logged out - logged on: 06/06/19 @ 12:33:32
-User admin1 logged in - logged on 06/06/19 @ 12:33:40
-User patient logged in - logged on 06/07/19 @ 17:56:37
-User patient logged out - logged on: 06/07/19 @ 17:59:07
-User admin1 logged in - logged on 06/07/19 @ 17:59:19
-User admin1 logged out - logged on: 06/07/19 @ 17:59:38
-User doctor1 logged in - logged on 06/07/19 @ 17:59:51
-User doctor1 logged out - logged on: 06/07/19 @ 18:00:38
-User patient logged in - logged on 06/07/19 @ 18:00:45
-User patient created an appointment at Hospital 2 on 07,01,2019 08:00 AM - logged on: 06/07/19 @ 18:01:49
-User patient logged out - logged on: 06/07/19 @ 18:02:31
-User admin1 logged in - logged on 06/07/19 @ 18:08:31
-User admin1 logged out - logged on: 06/07/19 @ 18:10:09
-User patient logged in - logged on 06/07/19 @ 18:30:16
-User  logged out - logged on: 06/07/19 @ 21:52:51
-User doctor1 logged in - logged on 06/07/19 @ 21:53:20
-Doctor doctor1 sent a message to patient - logged on: 06/07/19 @ 22:40:04
-User doctor1 logged out - logged on: 06/07/19 @ 23:04:37
-User patient logged in - logged on 06/07/19 @ 23:04:48
-Patient patient sent a message to doctor1 - logged on: 06/07/19 @ 23:05:43
-patient deleted message #2 - logged on: 06/07/19 @ 23:10:45
-User  logged out - logged on: 06/07/19 @ 23:28:45
-User doctor1 logged in - logged on 06/07/19 @ 23:28:56
-Doctor doctor1 sent a message to patient - logged on: 06/07/19 @ 23:29:33
- deleted message #3 - logged on: 06/07/19 @ 23:33:45
- deleted message #3 - logged on: 06/07/19 @ 23:33:50
- deleted message #3 - logged on: 06/07/19 @ 23:33:55
-User patient logged in - logged on 06/07/19 @ 23:35:41
-Patient patient sent a message to doctor1 - logged on: 06/07/19 @ 23:36:16
-User doctor1 logged in - logged on 06/09/19 @ 14:00:38
-doctor1 deleted message #2 - logged on: 06/09/19 @ 14:11:26
-User patient logged in - logged on 06/09/19 @ 14:12:52
-Patient patient sent a message to doctor2 - logged on: 06/09/19 @ 14:13:16
-User patient logged in - logged on 06/09/19 @ 14:16:35
-User  logged out - logged on: 06/09/19 @ 14:17:47
-User patient logged in - logged on 06/09/19 @ 14:19:22
-User patient logged in - logged on 06/09/19 @ 14:22:02
-patient deleted message #4 - logged on: 06/09/19 @ 14:22:13
-User patient logged in - logged on 06/09/19 @ 14:26:37
-Patient patient sent a message to doctor1 - logged on: 06/09/19 @ 14:26:58
-patient deleted message #5 - logged on: 06/09/19 @ 14:27:09
-patient deleted message #7 - logged on: 06/09/19 @ 14:27:13
-patient deleted message #6 - logged on: 06/09/19 @ 14:27:17
-patient deleted message #1 - logged on: 06/09/19 @ 14:27:22
-User patient logged out - logged on: 06/09/19 @ 14:27:41
-User doctor1 logged in - logged on 06/09/19 @ 14:40:44
-Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 15:11:16
-User patient logged in - logged on 06/09/19 @ 15:54:52
-User  logged out - logged on: 06/09/19 @ 15:57:00
-User patient logged in - logged on 06/09/19 @ 15:57:07
-User patient logged in - logged on 06/09/19 @ 16:29:53
-User  logged out - logged on: 06/09/19 @ 16:31:50
-User patient logged in - logged on 06/09/19 @ 16:32:02
-User  logged out - logged on: 06/09/19 @ 16:38:46
-User patient logged in - logged on 06/09/19 @ 16:38:54
-User patient logged in - logged on 06/09/19 @ 16:40:40
-Patient patient sent a message to doctor1 - logged on: 06/09/19 @ 16:41:02
-User  logged out - logged on: 06/09/19 @ 16:42:36
-User patient logged in - logged on 06/09/19 @ 16:42:42
-User patient logged out - logged on: 06/09/19 @ 16:42:58
-User admin1 logged in - logged on 06/09/19 @ 16:43:06
-User  logged out - logged on: 06/09/19 @ 16:46:28
-User admin1 logged in - logged on 06/09/19 @ 16:46:34
-User admin1 logged out - logged on: 06/09/19 @ 16:47:03
-User patient logged in - logged on 06/09/19 @ 16:48:35
-User patient logged out - logged on: 06/09/19 @ 16:49:20
-User doctor1 logged in - logged on 06/09/19 @ 16:49:33
-Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 16:50:07
-Patient patient's test results were released by Doctor doctor1 - logged on: 06/09/19 @ 17:01:04
-User doctor1 logged in - logged on 06/09/19 @ 17:04:24
-User  logged out - logged on: 06/09/19 @ 17:08:05
-User doctor1 logged in - logged on 06/09/19 @ 17:08:12
-Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 17:09:27
-User  logged out - logged on: 06/09/19 @ 17:13:22
-User doctor1 logged in - logged on 06/09/19 @ 17:13:33
-Doctor doctor1 created a new test for Patient patient - logged on: 06/09/19 @ 17:13:57
-Patient patient's test results were released by Doctor doctor1 - logged on: 06/09/19 @ 17:14:00
-Patient patient's test results were released by Doctor doctor1 - logged on: 06/09/19 @ 17:30:24
-User doctor1 logged out - logged on: 06/09/19 @ 17:32:42
-User patient logged in - logged on 06/09/19 @ 17:32:51
-User patient logged out - logged on: 06/09/19 @ 17:33:09
-User doctor1 logged in - logged on 06/09/19 @ 17:33:25
-User doctor1 logged out - logged on: 06/09/19 @ 17:35:37
-User doctor1 logged in - logged on 06/09/19 @ 17:35:44
-User doctor1 logged out - logged on: 06/09/19 @ 17:39:12
-User patient logged in - logged on 06/09/19 @ 17:39:20
-User doctor1 logged in - logged on 06/09/19 @ 18:23:07
-User doctor1 logged out - logged on: 06/09/19 @ 18:31:25
-User admin1 logged in - logged on 06/09/19 @ 18:32:06
-User admin1 logged in - logged on 06/09/19 @ 18:36:31
-Administrator admin1 registered a new Administrator account - logged on: 06/09/19 @ 18:47:56
-User admin1 logged out - logged on: 06/09/19 @ 18:48:00
-User lizenga logged in - logged on 06/09/19 @ 18:48:07
-User lizenga logged out - logged on: 06/09/19 @ 18:49:41
-User adminjohn logged in - logged on 06/09/19 @ 19:01:27
-User adminjohn logged out - logged on: 06/09/19 @ 19:01:37
+User admin2 logged in - logged on 06/11/19 @ 09:44:35
+Administrator admin2 registered a new doctor account - logged on: 06/11/19 @ 09:49:28
+Administrator admin2 registered a new Nurse account - logged on: 06/11/19 @ 09:51:43
+User admin2 logged out - logged on: 06/11/19 @ 09:51:53
+User patient1 registered a new account - logged on: 06/11/19 @ 09:56:17
+User patient1 created an appointment at Szpital Miejski on 06,23,2019 08:30 AM - logged on: 06/11/19 @ 09:57:09
+User patient1 logged out - logged on: 06/11/19 @ 10:04:48
+User doctor1 logged in - logged on 06/11/19 @ 10:04:57
+User doctor1 logged out - logged on: 06/11/19 @ 10:11:01
+User patient2 registered a new account - logged on: 06/11/19 @ 10:13:44
+User patient2 logged out - logged on: 06/11/19 @ 10:13:46
+User doctor1 logged in - logged on 06/11/19 @ 10:13:55
+User  logged out - logged on: 06/11/19 @ 10:22:01
+User doctor1 logged in - logged on 06/11/19 @ 10:22:10
+User doctor1 cancelled Appointment #1 - logged on: 06/11/19 @ 10:29:50
+User doctor1 logged out - logged on: 06/11/19 @ 10:31:22
+User admin2 logged in - logged on 06/11/19 @ 10:34:14
+Administrator admin2 registered a new doctor account - logged on: 06/11/19 @ 10:35:06
+User admin2 logged out - logged on: 06/11/19 @ 10:35:09
+User doctor2 logged in - logged on 06/11/19 @ 10:35:16
+User doctor2 logged out - logged on: 06/11/19 @ 10:35:42
+User doctor1 logged in - logged on 06/11/19 @ 10:35:51
+User doctor1 logged out - logged on: 06/11/19 @ 10:36:05
+User admin1 logged in - logged on 06/11/19 @ 10:36:37
+Administrator admin1 registered a new doctor account - logged on: 06/11/19 @ 10:37:31
+User admin1 logged out - logged on: 06/11/19 @ 10:37:53
+User doctor3 logged in - logged on 06/11/19 @ 10:38:00
+User doctor3 logged out - logged on: 06/11/19 @ 10:38:40
+User  logged out - logged on: 06/11/19 @ 10:38:48
+User doctor1 logged in - logged on 06/11/19 @ 10:38:56
+User doctor1 logged out - logged on: 06/11/19 @ 10:41:15

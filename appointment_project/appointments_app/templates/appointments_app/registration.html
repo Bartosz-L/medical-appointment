@@ -79,7 +79,7 @@
         alert("Please enter a height");
         return false;
       } else if (!validateHeight(document.register.height.value)) {
-        alert(document.register.height.value + " is incorrectly formatted, use  0\'00\" instead");
+        alert(document.register.height.value + " is incorrectly formatted, use  0\.00 instead");
         return false;
       } else if (document.register.weight.value.length === 0) {
         alert("Please enter a weight");
@@ -148,7 +148,7 @@
     }
 
     function validateHeight(height) {
-      const re = /^\d'(\d{1,2}")?$/;
+      const re = /^\d.(\d{1,2})?$/;
       return re.test(height);
     }
 

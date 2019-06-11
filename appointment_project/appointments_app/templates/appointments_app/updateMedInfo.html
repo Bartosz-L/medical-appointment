@@ -64,7 +64,7 @@
   <script type="text/javascript">
     function checkform() {
       if (!validateHeight(document.update.height.value)) {
-        alert(document.update.height.value + " is incorrectly formatted, use  0\'00\" instead");
+        alert(document.update.height.value + " is incorrectly formatted, use  0\.00 instead");
         return false;
       } else if (!validateWeight(document.update.weight.value)) {
         alert(document.update.weight.value + " is incorrectly formatted, use  000.00 instead");
@@ -85,7 +85,7 @@
     }
 
     function validateHeight(height) {
-      const re = /^\d'(\d{1,2}")?$/;
+      const re = /^\d.(\d{1,2})?$/;
       return re.test(height);
     }
 

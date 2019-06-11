@@ -355,8 +355,9 @@ def updateProfileInfo(request):
 # Widok renderuje HTML dla zmiany informacji medycznych o pacjencie.
 def updateMed(request, pat_id):
     global uname
+    type = getUserType(uname)
     patient = Patient.objects.get(id=pat_id)
-    context = {'patient': patient}
+    context = {'patient': patient, 'type': type}
     return render(request, 'appointments_app/updateMedInfo.html', context)
 
 

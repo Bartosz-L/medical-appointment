@@ -57,7 +57,9 @@
 
 
           <form action="{% url 'appointments_app:updateProfile' %}">
-            <button type="submit" class="btn btn-primary btn-lg btn-block" value="Update Profile Information">Zaktualizuj profil</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" value="Update Profile Information">
+              Zaktualizuj profil
+            </button>
           </form>
 
           <hr>
@@ -124,7 +126,8 @@
         {% endif %}
 
         {% if type != "Patient" %}
-          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, oto pacjenci w lokalizacji <span style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
+          <h3><span style="text-decoration: underline;">{{ employee.firstName }} {{ employee.lastName }}</span>, oto
+            pacjenci w lokalizacji <span style="text-decoration: underline;">{{ employee.workplace.name }}</span></h3>
           {% if patw %}
             <table class="table">
               <thead class="thead-dark">
@@ -154,14 +157,14 @@
                     {% if type == "Doctor" %}
                       <td>
                         <form action="{% url 'appointments_app:tests' patient.id %}">
-                          <button type="submit" class="btn btn-primary btn-lg btn-block"
+                          <button type="submit" class="btn btn-primary btn-block"
                                   value="Test Results">Wyniki badań
                           </button>
                         </form>
                       </td>
                       <td>
                         <form action="{% url 'appointments_app:discharge' patient.id %}">
-                          <button type="submit" class="btn btn-warning btn-lg btn-block"
+                          <button type="submit" class="btn btn-warning btn-block"
                                   value="Discharge">Wyrejestruj
                           </button>
                         </form>
@@ -179,7 +182,7 @@
           <br>
           <br>
 
-          <h3>Brak umówionych pacjentów</h3>
+          <h3>Przyjęcia pacjentów</h3>
           <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -190,33 +193,32 @@
             </thead>
             <tbody>
             {% for patient in patients %}
-              {% if patient.hospital.address != employee.workplace.address %}
+              {% if patient.hospital != employee.workplace %}
                 <tr>
                   {% if type == "Doctor" %}
-                    <td><a class="alink"
-                           href="{% url 'appointments_app:updateMed' patient.id %}">{{ patient.lastName }}, {{ patient.firstName }}</a>
+                    <td>
+                      <a href="{% url 'appointments_app:updateMed' patient.id %}">{{ patient.lastName }}, {{ patient.firstName }}</a>
                     </td>
                   {% else %}
                     <td>{{ patient.lastName }}, {{ patient.firstName }}</td>
                   {% endif %}
 
                   {% if patient.hospital == None %}
-                    <td>{{ patient.hospital.name }}</td>
+                    <td>BRAK</td>
                     <td>
-                      <form action="{% url 'appointments_app:admission' patient.id employee.workplace.id %}"><input
-                          type="submit"
-                          value="Admit"/>
+                      <form action="{% url 'appointments_app:admission' patient.id employee.workplace.id %}">
+                        <button type="submit" value="Admit" class="btn btn-success">Przyjmij</button>
                       </form>
                     </td>
                   {% else %}
                     {% if type == "Nurse" %}
-                      <td>{{ patient.hospital.name }}</td>
+                      <td>{{ patient.hospital }}</td>
                     {% endif %}
                     {% if type == "Doctor" %}
-                      <td>{{ patient.hospital.name }}</td>
+                      <td>{{ patient.hospital }}</td>
                       <td>
-                        <form action="{% url 'appointments_app:transfer' patient.id employee.workplace.id %}"><input
-                            type="submit" value="Transfer"/></form>
+                        <form action="{% url 'appointments_app:transfer' patient.id employee.workplace.id %}">
+                          <button type="submit" value="Transfer" class="btn btn-warning">Przenieś</button>
                       </td>
                     {% endif %}
                   {% endif %}
