@@ -29,3 +29,12 @@ User doctor3 logged out - logged on: 06/11/19 @ 10:38:40
 User  logged out - logged on: 06/11/19 @ 10:38:48
 User doctor1 logged in - logged on 06/11/19 @ 10:38:56
 User doctor1 logged out - logged on: 06/11/19 @ 10:41:15
+User patient1 logged in - logged on 06/16/19 @ 10:18:38
+User patient1 logged out - logged on: 06/16/19 @ 10:18:51
+User bartek registered a new account - logged on: 06/16/19 @ 10:21:10
+User bartek created an appointment at Szpital Miejski on 07,01,2019 08:00 AM - logged on: 06/16/19 @ 10:22:20
+User bartek logged out - logged on: 06/16/19 @ 10:22:43
+User doctor3 logged in - logged on 06/16/19 @ 10:22:50
+User doctor3 logged out - logged on: 06/16/19 @ 10:23:51
+User doctor1 logged in - logged on 06/16/19 @ 10:24:07
+Doctor doctor1 created a prescription for Patient bartek - logged on: 06/16/19 @ 10:24:55
